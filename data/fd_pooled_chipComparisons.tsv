@@ -1,0 +1,7 @@
+samples	mask_ultrahigh_signals	control	dups	total	peaksOverlap_GS	peaksOverlap_BL	peaksOverlap_FDSchmid	peaksOverlap_FDSchmidChIPseq_and_GS	peaksOverlap_FDSchmidChIPseq_and_BL
+FD	noScreen	none	TRUE	5004	96	109	4030	1	5
+FD	noScreen	input	TRUE	5192	5	16	4269	0	5
+FD	noScreen	mock	TRUE	4244	0	7	3629	0	4
+FD	GS	input	TRUE	5187	0	11	4269	0	5
+FD	BL	input	TRUE	5322	0	0	4368	0	0
+FD	noScreen	input	FALSE	4420	9	19	3764	0	6
