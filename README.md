@@ -10,10 +10,10 @@ The `Data` directory contains tables and files used to generate some of the plot
    * output files from UMAP (v1.1.1)
     * Note that the repo for this tool was originally located at the following (link)[https://bitbucket.org/hoffmanlab/proj/bismap]
     * However, the repo was moved to this (link)[https://github.com/hoffmangroup/umap]
-  * Twenty input-seq samples from *Arabidopsis thaliana* were cleaned and mapped (MAPQ>=30). See Table S2 in the Greenscreen Paper.
+  * Twenty input-seq samples from *Arabidopsis thaliana* were cleaned and mapped (MAPQ>3=0). See Table S2 in the Greenscreen Paper.
 * data/arabidopsis_greenscreen_20inputs.bed
  * Green screen regions were generated using the green screen pipeline.
-   1. MACS2 v2.2.7.1 (—keepdup “auto” —no model –extsize [read length] —broad --nolambda  -g 101274395) was run on each of the twenty inputs (Table S2 in the paper). 
+   1. MACS2 v2.2.7.1 (—keepdup “auto” —nomodel –extsize [read length] —broad --nolambda  -g 101274395) was run on each of the twenty inputs (Table S2 in the paper). 
     2. Peaks with average q-values (column 9 in the broadPeak output file) above 10-10 were filtered out. 
     3. Peaks called from the individual inputs were concatenated
     4. All peaks within a 5kb distance were merged. 
@@ -30,7 +30,55 @@ The `Data` directory contains tables and files used to generate some of the plot
     * green screen peaks (data/arabidopsis_greenscreen_20inputs.bed)
     * LFY ChIP-chip peaks from Winter *et al* 2011 
    * different parameters were tested on LFY_W to see how it changes the peak overlap
-* ChIPQCreport/ : directory containing the results of ChIPQC on inputs and ChIP-seq experiments used in this paper
+* data/ChIPQCreport/ : directory containing the results of ChIPQC on inputs and ChIP-seq experiments used in this paper
+  * 20inputs_blMask
+   * ChIPQC Results for 20 random inputs (see Table S2 in the paper) after using samtools to remove reads that overlap blacklist (data/arabidopsis_blacklist_20inputs.bed)
+  * 20inputs_gsMask
+   * ChIPQC Results for 20 random inputs (see Table S2 in the paper) after using samtools to remove reads that overlap greenscreen (data/arabidopsis_greenscreen_20inputs.bed)
+  * 20inputs_noMask
+   * ChIPQC Results for 20 random inputs (see Table S2 in the paper) 
+  * chip_blMask_noDups_lfyWInputControl_extFragSize_qval10
+   * This directory contains ChIPQC Results for LFY, TFL1, and FD mapped reads (without duplicates) after blacklist (data/arabidopsis_blacklist_20inputs.bed) masking
+   * Peaks were called on these reads using MACS2 v2.2.7.1  (—keepdup “auto” —nomodel –extsize [fragment_length] —broad --nolambda  -g 101274395)
+   * Inputs from Jin 2021 were down-sampled and pooled to use as the MACS2 control
+   * Peaks with summit q-values (column 9 in narrowPeak file) greater than 10^-10 were not included
+  * chip_blMask_noDups_tfl1WInputControl_extFragSize_qval10:
+   * This directory contains ChIPQC Results for LFY, TFL1, and FD mapped reads (without duplicates) after blacklist (data/arabidopsis_blacklist_20inputs.bed) masking
+   * Peaks were called on these reads using MACS2 v2.2.7.1  (—keepdup “auto” —nomodel –extsize [fragment_length] —broad --nolambda  -g 101274395)
+   * Inputs from Zhu 2020 were down-sampled and pooled to use as the MACS2 control
+   * Peaks with summit q-values (column 9 in narrowPeak file) greater than 10^-10 were not included
+  * chip_blMask_wiDups_lfyWInputControl_extFragSize_qval10: 
+   * This directory contains ChIPQC Results for LFY, TFL1, and FD mapped reads after blacklist (data/arabidopsis_blacklist_20inputs.bed) masking
+   * Peaks were called on these reads using MACS2 v2.2.7.1  (—keepdup “auto” —nomodel –extsize [fragment_length] —broad --nolambda  -g 101274395)
+   * Inputs from Jin 2021 were down-sampled and pooled to use as the MACS2 control
+   * Peaks with summit q-values (column 9 in narrowPeak file) greater than 10^-10 were not included
+  * chip_blMask_wiDups_noControl_extFragSize_qval10: 
+   * This directory contains ChIPQC Results for LFY, TFL1, and FD mapped reads (without duplicates) after blacklist (data/arabidopsis_blacklist_20inputs.bed) masking
+   * Peaks were called on these reads using MACS2 v2.2.7.1  (—keepdup “auto” —nomodel –extsize [fragment_length] —broad --nolambda  -g 101274395)
+   * Nothin was set as the MACS2 control
+   * Peaks with summit q-values (column 9 in narrowPeak file) greater than 10^-10 were not included
+  * chip_blMask_wiDups_respectiveMockControls_extFragSize_qval10:
+   * This directory contains ChIPQC Results for LFY, TFL1, and FD mapped reads (without duplicates) after blacklist (data/arabidopsis_blacklist_20inputs.bed) masking
+   * Peaks were called on these reads using MACS2 v2.2.7.1  (—keepdup “auto” —nomodel –extsize [fragment_length] —broad --nolambda  -g 101274395)
+   * Mock samples were down-sampled and pooled to use as the MACS2 control for each ChIP respectively (see Table S3 in the paper)
+   * Peaks with summit q-values (column 9 in narrowPeak file) greater than 10^-10 were not included
+  * chip_blMask_wiDups_tfl1WInputControl_extFragSize_qval10: 
+   * This directory contains ChIPQC Results for LFY, TFL1, and FD mapped reads (without duplicates) after blacklist (data/arabidopsis_blacklist_20inputs.bed) masking
+   * Peaks were called on these reads using MACS2 v2.2.7.1  (—keepdup “auto” —nomodel –extsize [fragment_length] —broad --nolambda  -g 101274395)
+   * Inputs from Zhu 2020 were down-sampled and pooled to use as the MACS2 control
+   * Peaks with summit q-values (column 9 in narrowPeak file) greater than 10^-10 were not included
+  * chip_gsMask_noDups_lfyWInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_gsMask_noDups_tfl1WInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_gsMask_wiDups_lfyWInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_gsMask_wiDups_noControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_gsMask_wiDups_respectiveMockControls_extFragSize_qval10: ChIPQC Results for 
+  * chip_gsMask_wiDups_tfl1WInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_noMask_noDups_lfyWInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_noMask_noDups_tfl1WInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_noMask_wiDups_lfyWInputControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_noMask_wiDups_noControl_extFragSize_qval10: ChIPQC Results for 
+  * chip_noMask_wiDups_respectiveMockControls_extFragSize_qval10: ChIPQC Results for 
+  * chip_noMask_wiDups_tfl1WInputControl_extFragSize_qval10: ChIPQC Results for
 ## B. `notebook` directory
 jupyter notebooks used to generate some of the plots for the paper 
 <br>
