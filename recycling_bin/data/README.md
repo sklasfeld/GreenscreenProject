@@ -29,31 +29,6 @@ This directory contains tables and files used to generate some of the plots for 
     * green screen peaks (data/arabidopsis_greenscreen_20inputs.bed)
     * LFY ChIP-chip peaks from Winter *et al* 2011 
   * different parameters were tested on LFY_W to see how it changes the peak overlap
-* callArtifSignalMetrics.tsv
-  * Metrics table to compare how different Arabidopsis artificial signals (AS) masks alter downstream analysis results
-  * Features:
-    * AS_mask_type: AS Mask Type
-      * None: No mask
-      * blacklist: reads removed that overlapped with blacklist regions
-      * greenscreen: peaks removed that overlapped with green screen regions
-    * average_MACS2_qvalue: Green screen parameter to call peaks in inputs that have at least this set mean -log10 q-value of a peak region.
-      * For example, if this parameter is set to 10 then peaks called by MACS2 are filtered to have a mean q-value <= 10^-10.
-    * merge_distance: Blacklist and greenscreen parameter to merge two significant regions within this maximum distance.
-      * For example, if this papameter is set to 1000 then significant regions called by either the blacklist tool or MACS2 for green screen that are within 1kb apart will become a single region. 
-    * num_inputs_used: Number of inputs imported into either the blacklist tool or MACS2 for green screen
-    * num_inputs_available: To test the number of random inputs needs for identifying artificial signals, subsamples were normally chosen from the 20 random inputs that were analyzed. However, there are only the four inputs to match the ChIP experiments from Zhu et al 2021 in the downstream analysis. To compare the results of the downstream analysis between random and related input samples, we performed analysis using 3 random/related input samples chosen from 4 random/related input samples.
-    * min_samples_called: Green screen parameter sets the minimum number of input samples' peaks must overlap for a region to be labeled as part of the green screen
-      * regions where less than `min_samples_called` samples have peaks that overlap will not be included in the green screen
-    * inputs_used: The names of the inputs used. 
-      * information about inputs A-T can be found in Table S2.
-      * TFL1_Input_R1, TFL1_Input_R2, TFL1_Input_R3, TFL1_Input_R4 
-	are the inputs used in et al Zhu 2021.
-    * genome_cov: number of basepairs that the AS regions mask out
-    * 100per_genes_coverage: the number of genes 100% masked out by the AS mask
-    * perc_lfy_chipseq_in_chipchip: percent of LFY callus peaks given MASK overlap with LFY chip-chip seedlings
-    * c(Yk=2, Y’k=2): rand-index values to measure k=2 clustering hypothesis
-    * c(Yk=3, Y’k=3): rand-index values to measure k=3 clustering hypothesis
-    * c(Zk=4, Z’k=4): rand-index values to measure k=4 clustering hypothesis
 * ChIPQCreport
   * directory containing the results of ChIPQC on inputs and ChIP-seq experiments used in this paper
   * see README.md in this directory for more information

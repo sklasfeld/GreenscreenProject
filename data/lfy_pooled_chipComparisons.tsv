@@ -1,7 +1,13 @@
-samples	mask_ultrahigh_signals	control	dups	total	peaksOverlap_GS	peaksOverlap_BL	peaksOverlap_LFYChIPchip	peaksOverlap_LFYChIPchip_and_GS	peaksOverlap_LFYChIPchip_and_BL
-LFY	noScreen	none	TRUE	2229	125	172	710	0	0
-LFY	noScreen	input	TRUE	1680	50	62	704	0	0
-LFY	noScreen	mock	TRUE	998	14	14	551	0	0
-LFY	GS	input	TRUE	1630	0	12	704	0	0
-LFY	BL	input	TRUE	1656	0	0	698	0	0
-LFY	noScreen	input	FALSE	1293	60	66	633	0	0
+samples	mask_ultrahigh_signals	control	dups	log10_summit_qvalue	total	peaksOverlap_GS	peaksOverlap_LFYChIPchip	peaksOverlap_LFYChIPchip_and_GS
+LFY	noScreen	none	TRUE	10	2383	147	723	0
+LFY	noScreen	Input	TRUE	10	1755	67	712	0
+LFY	noScreen	Mock	TRUE	10	1003	0	557	0
+LFY	GS	Input	TRUE	10	1688	0	712	0
+LFY	BL	Input	TRUE	10	1635	0	697	0
+LFY	noScreen	Input	FALSE	10	1293	60	633	0
+LFY	noScreen	Input	TRUE	2	8574	109	988	0
+LFY	noScreen	Input	TRUE	5	4273	96	890	0
+LFY	noScreen	Input	TRUE	20	927	35	518	0
+LFY	noScreen	Input	TRUE	30	666	25	418	0
+LFY	noScreen	Input	TRUE	40	516	21	345	0
+LFY	noScreen	Input	TRUE	50	410	19	282	0

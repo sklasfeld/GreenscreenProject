@@ -1,0 +1,50 @@
+AS_mask_type	average_MACS2_qvalue	merge_distance	num_inputs_used	num_inputs_available	min_samples_called	inputs_used	genome_cov	100per_genes_coverage	perc_lfy_chipseq_in_chipchip	c(Yk=2, Y’k=2)	c(Yk=3, Y’k=3)	c(Zk=4, Z’k=4)
+None	N/A	N/A	0	20	N/A	N/A	0	0	40.57%	0.56	0.59	0.73
+blacklist	N/A	5000	3	20	N/A	A,N,Q	3,771,300	479	43.15%	0.83	0.92	1.00
+blacklist	N/A	5000	3	20	N/A	D,P,R	3,743,200	443	43.53%	1.00	0.84	1.00
+blacklist	N/A	5000	3	20	N/A	J,P,S	3,654,100	446	43.63%	1.00	0.84	1.00
+blacklist	N/A	5000	3	4	N/A	E,G,L	3,723,300	403	43.55%	1.00	0.84	1.00
+blacklist	N/A	5000	3	4	N/A	E,G,O	2,639,500	240	43.45%	1.00	0.84	1.00
+blacklist	N/A	5000	3	4	N/A	E,L,O	2,560,700	238	50.00%	1.00	0.84	1.00
+blacklist	N/A	5000	3	4	N/A	G,L,O	2,725,300	257	43.53%	1.00	0.84	1.00
+blacklist	N/A	5000	3	4	N/A	TFL1_Input_R1, TFL1_Input_R2, TFL1_Input_R3	3,338,500	228	43.47%	0.83	0.92	1.00
+blacklist	N/A	5000	3	4	N/A	TFL1_Input_R1, TFL1_Input_R2, TFL1_Input_R4	3,307,200	232	43.50%	0.83	0.92	1.00
+blacklist	N/A	5000	3	4	N/A	TFL1_Input_R1, TFL1_Input_R3, TFL1_Input_R4	3,221,100	225	43.58%	0.83	0.92	1.00
+blacklist	N/A	5000	3	4	N/A	TFL1_Input_R2, TFL1_Input_R3, TFL1_Input_R4	3,187,500	226	43.63%	0.83	0.92	1.00
+blacklist	N/A	5000	4	20	N/A	A,E,F,T	3,788,700	445	43.45%	0.83	0.92	1.00
+blacklist	N/A	5000	4	20	N/A	A,O,P,R	3,700,300	445	43.42%	1.00	1.00	1.00
+blacklist	N/A	5000	4	20	N/A	E,G,L,O	2,975,300	448	43.39%	1.00	1.00	1.00
+blacklist	N/A	5000	6	20	N/A	A,G,H,K,L,Q	2,869,900	438	43.45%	1.00	0.84	1.00
+blacklist	N/A	5000	6	20	N/A	C,M,N,O,R,S	3,690,000	474	43.50%	1.00	1.00	1.00
+blacklist	N/A	5000	6	20	N/A	D,H,J,K,Q,S	3,355,900	431	43.53%	1.00	1.00	1.00
+blacklist	N/A	5000	10	20	N/A	B,D,F,H,K,L,M,N,P,T	3,266,800	441	43.45%	1.00	0.84	1.00
+blacklist	N/A	5000	10	20	N/A	C,G,J,K,M,P,Q,R,S,T	3,107,300	410	43.50%	1.00	1.00	1.00
+blacklist	N/A	5000	10	20	N/A	E,F,G,H,K,M,N,Q,R,T	3,153,500	438	43.53%	1.00	1.00	1.00
+blacklist	N/A	5000	20	20	N/A	A-T	2,854,600	268	42.63%	1.00	0.84	1.00
+greenscreen	10	5000	3	20	2	A,N,Q	314,115	83	41.93%	0.83	0.92	0.83
+greenscreen	10	5000	3	20	2	J,P,S	376,823	83	42.01%	0.83	0.92	0.83
+greenscreen	10	5000	3	20	2	D,P,R	352,729	83	41.98%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	E,G,L	699,234	95	42.38%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	E,G,O	385,313	85	42.11%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	E,L,O	700,912	95	42.38%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	G,L,O	686,231	92	42.38%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	TFL1_Input_R1, TFL1_Input_R2, TFL1_Input_R3	356,625	83	42.26%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	TFL1_Input_R1, TFL1_Input_R2, TFL1_Input_R4	354,881	83	42.16%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	TFL1_Input_R1, TFL1_Input_R3, TFL1_Input_R4	378,949	83	42.26%	1.00	0.84	1.00
+greenscreen	10	5000	3	4	2	TFL1_Input_R2, TFL1_Input_R3, TFL1_Input_R4	379,009	83	42.26%	1.00	0.84	1.00
+greenscreen	10	5000	4	20	2	A,E,F,T	434,928	85	42.26%	1.00	0.84	1.00
+greenscreen	10	5000	4	20	2	A,O,P,R	359,887	83	42.01%	0.83	0.92	0.83
+greenscreen	10	5000	4	20	2	E,G,L,O	470,499	87	42.26%	1.00	0.84	1.00
+greenscreen	10	5000	6	20	3	C,M,N,O,R,S	376,908	83	42.03%	1.00	0.84	1.00
+greenscreen	10	5000	6	20	3	D,H,J,K,Q,S	420,330	83	42.06%	1.00	0.84	1.00
+greenscreen	10	5000	6	20	3	A,G,H,K,L,Q	431,004	85	42.03%	1.00	0.84	1.00
+greenscreen	10	5000	10	20	5	C,G,J,K,M,P,Q,R,S,T	461,000	83	42.18%	1.00	0.84	1.00
+greenscreen	10	5000	10	20	5	E,F,G,H,K,M,N,Q,R,T	471,885	84	42.18%	1.00	0.84	1.00
+greenscreen	10	5000	10	20	5	B,D,F,H,K,L,M,N,P,T	479,234	85	42.18%	1.00	0.84	1.00
+greenscreen	10	5000	20	20	10	A-T	484,802	86	42.36%	1.00	0.84	1.00
+greenscreen	20	5000	20	20	10	A-T	112,216	5	41.93%	0.83	0.92	0.83
+greenscreen	30	5000	20	20	10	A-T	97,141	5	41.93%	0.83	0.92	0.83
+greenscreen	40	5000	20	20	10	A-T	76,935	5	41.83%	0.83	0.92	0.83
+greenscreen	50	5000	20	20	10	A-T	39,962	3	41.52%	0.83	0.92	0.83
+greenscreen	60	5000	20	20	10	A-T	22,657	1	41.42%	0.83	0.92	0.83
+greenscreen	10	0	20	20	10	A-T	129,820	6	42.01%	0.83	0.92	0.82
