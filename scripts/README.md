@@ -1,25 +1,25 @@
 See supplemental methods for more detailed information.
 
 # 1.3 Green screen Generation
-1. scripts/import_raw_fasta_inputs.sh
+1. `scripts/import_raw_fasta_inputs.sh`
 	
 	a. Purpose: batch imports raw FASTQ files
 	
 	b. Output Location: Current Working Directory
 
-2. scripts/organize_raw_fasta_input.sh
+2. `scripts/organize_raw_fasta_input.sh`
 	
 	a. Purpose: batch organizes raw FASTQ files
 	
 	b. Output Location: fastq/raw
 
-3. scripts/fastqc_raw_inputs.sh
+3. `scripts/fastqc_raw_inputs.sh`
 	
 	a. Purpose: batch FASTQC on raw FASTQ files
 	
 	b. Output Location: data/FASTQC/raw
 
-4. scripts/trimmomatic_inputs.sh 
+4. `scripts/trimmomatic_inputs.sh`
 	
 	a. Purpose:
 		
@@ -33,7 +33,7 @@ See supplemental methods for more detailed information.
 		
 		ii. fastqc files: data/FASTQC/trimmed 
 
-5. scripts/mapped_inputs.sh
+5. `scripts/mapped_inputs.sh`
 
 	a. Purpose: batch generate, sort, and index mapped reads with MAPQ >=30
 	
@@ -57,7 +57,7 @@ See supplemental methods for more detailed information.
 		
 	c. Output Location: mapped/input
 
-6. scripts/predictd_inputs.sh
+6. `scripts/predictd_inputs.sh`
 
 	a. Purpose: batch measure strand bias with macs2 predictd
 	
@@ -71,7 +71,7 @@ See supplemental methods for more detailed information.
 		
 	c. Output Location: data/plotStrandBias/inputs
 
-7. scripts/macs2_callpeaks_inputs.sh
+7. `scripts/macs2_callpeaks_inputs.sh`
 	
 	a. Purpose: batch call peaks in each input with MACS2
 	
@@ -85,7 +85,7 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: data/macs2_out/inputControls
 	
-8. scripts/generate_20input_greenscreenBed.sh
+8. `scripts/generate_20input_greenscreenBed.sh`
 	
 	a. Purpose: batch generate greenscreen from peaks called in 20 individual inputs
 	
@@ -101,19 +101,19 @@ See supplemental methods for more detailed information.
 
 # 1.4 Calling ChIP-Seq Peaks
 
-1. scripts/import_raw_fasta_publishedChIPsAndControls.sh 
+1. `scripts/import_raw_fasta_publishedChIPsAndControls.sh`
 	
 	a. Purpose: batch imports raw FASTQ files
 	
 	b. Output Location: Current Working Directory
 
-2. scripts/organize_raw_fasta_publishedChIPsAndControls.sh
+2. `scripts/organize_raw_fasta_publishedChIPsAndControls.sh`
 	
 	a. Purpose: batch organizes raw FASTQ files
 	
 	b. Output Location: fastq/raw
 
-3. scripts/fastqc_raw_fasta_publishedChIPsAndControls.sh
+3. `scripts/fastqc_raw_fasta_publishedChIPsAndControls.sh`
 	
 	a. Purpose: batch FASTQC on raw FASTQ files
 	
@@ -121,7 +121,7 @@ See supplemental methods for more detailed information.
 	
 	c. Output Location: data/FASTQC/raw
 
-4. scripts/trimmomatic_publishedChIPsAndControls.sh
+4. `scripts/trimmomatic_publishedChIPsAndControls.sh`
 	
 	a. Purpose:
 		 
@@ -135,7 +135,7 @@ See supplemental methods for more detailed information.
 		
 		ii. fastqc files: data/FASTQC/trimmed 
 		
-5. scripts/mapped_publishedChIPsAndControls.sh
+5. `scripts/mapped_publishedChIPsAndControls.sh`
 	
 	a. Purpose: batch generate, sort, and index mapped reads with MAPQ >=30
 	
@@ -161,7 +161,7 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: mapped/chip
 
-6. scripts/predictd_publishedChIPsAndControls.sh
+6. `scripts/predictd_publishedChIPsAndControls.sh`
 	
 	a. Purpose: batch measure strand bias with macs2 predictd
 	
@@ -177,11 +177,11 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: data/plotStrandBias/chip
 
-7. ChIPQC.R
+7. `ChIPQC.R`
 	
 	a. Purpose: returns ChIP-Seq quality control metrics
 
-8. scripts/chipReplicates_BamToBigwig.sh
+8. `scripts/chipReplicates_BamToBigwig.sh`
 	
 	a. Purpose: generate IGV bigwig files for ChIP-Seq replicates
 	
@@ -201,7 +201,7 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: mapped/chip
 
-9. scripts/chipPooledBigwig.sh
+9. `scripts/chipPooledBigwig.sh`
 	
 	a. Purpose: generate IGV bigwig files for ChIP-Seq samples (average of the replicates)
 	
@@ -215,13 +215,13 @@ See supplemental methods for more detailed information.
 	
 	c. Output Location: mapped/chip
 
-10. scripts/downSampleBam_publishedChIPsAndControls.sh
+10. `scripts/downSampleBam_publishedChIPsAndControls.sh`
 	
 	a. Purpose: downsample each replicate to match the sampling depth of the replicate with the lowest sampling depth.
 	
 	b. Output Location: mapped/chip/downsample
 
-11. scripts/macs2_callpeaks_publishedChIPs.sh
+11. `scripts/macs2_callpeaks_publishedChIPs.sh`
 	
 	a. Purpose: call peaks on published ChIPs
 	
