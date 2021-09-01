@@ -1,9 +1,11 @@
 #!/bin/bash
 
 nthreads=2
+PICARD_PATH="/usr/src/picard/build/libs"
+
 while read samp; do
     # run bowtie2
-    bowtie2 -x meta/Araport11/bowtie2_genome_dir/TAIR10 \
+    bowtie2 -x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
         -S mapped/chip/${samp}.sam \
         fastq/trimmed/${samp}.trimmed.fastq
     # sort the reads
@@ -18,7 +20,7 @@ while read samp; do
     # index filtered reads
     samtools index mapped/chip/${samp}.filter.bam
     # mark duplicates with picard
-    java -jar picard.jar MarkDuplicates \
+    java -jar ${PICARD_PATH}/picard.jar MarkDuplicates \
         I=mapped/chip/${samp}.filter.bam \
         O=mapped/chip/${samp}.dupmark.bam \
         M=mapped/chip/${samp}.dup.qc \ 

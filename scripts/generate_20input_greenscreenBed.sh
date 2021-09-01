@@ -43,4 +43,5 @@ bedtools merge -c 4,5,6,7,8,9,4 \
 # than ${distinct_ninputs} distinct samples
 awk -v thresh=${distinct_ninputs} -F "\t" \
     'BEGIN{OFS="\t"} $10>=thresh{print}' \
+    ${merge_file} \
     > ${final_greenscreen}

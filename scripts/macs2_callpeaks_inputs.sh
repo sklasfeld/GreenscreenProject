@@ -9,8 +9,8 @@ q=10
 mkdir -p ${macs_out}/qval${q}
 
 while read line; do
-    x=$(echo $line | cut -f1)
-    readsize=$(echo $line | cut -f2)
+    x=$(echo $line | cut -d "," -f1)
+    readsize=$(echo $line | cut -d "," -f2)
 
     # call peaks with MACS2
     macs2 callpeak \
@@ -26,4 +26,4 @@ while read line; do
         $9>=q && $1!="ChrC" && $1!="ChrM"{print}' \
         ${macs_out}/input${x}_peaks.broadPeak > \
         ${macs_out}/qval${q}/input${x}_peaks.broadPeak
-done < meta/input_readsizes.tsv
+done < meta/input_readsizes.csv

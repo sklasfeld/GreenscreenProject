@@ -1,7 +1,7 @@
 #!/bin/bash
 
 nthreads=2
-
+PICARD_PATH="/usr/src/picard/build/libs"
 input_list=("A" "B" "C" "D" "E"
         "F" "G" "H" "I" "J" "K"
         "L" "M" "N" "O" "P" "Q"
@@ -9,7 +9,7 @@ input_list=("A" "B" "C" "D" "E"
 
 for x in "${input_list[@]}"; do
     # run bowtie2
-    bowtie2 -x meta/Araport11/bowtie2_genome_dir/TAIR10 \
+    bowtie2 -x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
         -S mapped/input/input${x}.sam \
         fastq/trimmed/input${x}.trimmed.fastq
     # sort the reads
@@ -24,10 +24,10 @@ for x in "${input_list[@]}"; do
     # index filtered reads
     samtools index mapped/input/input${x}.filter.bam
     # mark duplicates with picard
-    java -jar picard.jar MarkDuplicates \
+    java -jar ${PICARD_PATH}/picard.jar MarkDuplicates \
         I=mapped/input/input${x}.filter.bam \
         O=mapped/input/input${x}.dupmark.bam \
-        M=mapped/input/input${x}.dup.qc \ 
+        M=mapped/input/input${x}.dup.qc \
         VALIDATION_STRINGENCY=LENIENT \
         REMOVE_DUPLICATES=false ASSUME_SORTED=true
     # sort reads after marking the duplicates
