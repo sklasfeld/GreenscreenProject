@@ -3,11 +3,14 @@
 nthreads=2
 PICARD_PATH="/usr/src/picard/build/libs"
 
+# create output directory
+mkdir -p mapped/chip
+
 while read samp; do
     # run bowtie2
     bowtie2 -x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
         -S mapped/chip/${samp}.sam \
-        fastq/trimmed/${samp}.trimmed.fastq
+        fastq/trimmed/${samp}.trimmed.fastq.gz
     # sort the reads
     samtools sort -o mapped/chip/${samp}.bam \
         mapped/chip/${samp}.sam
