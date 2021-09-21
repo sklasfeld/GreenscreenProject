@@ -10,6 +10,7 @@ input_list=("A" "B" "C" "D" "E"
         "R" "S" "T")
 
 for x in "${input_list[@]}"; do
+    samp="input${x}"
     orig_bam="${working_dir}/input${x}.dupmark.sorted.bam"
 
     # normalize signal and output BEDGRAPH
