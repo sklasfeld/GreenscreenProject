@@ -1,10 +1,14 @@
 #!/bin/bash
 
+# create output directories
+mkdir -p fastq/trimmed
+mkdir -p data/FASTQC/trimmed
+
 trimmomatic_install_dir="/usr/src"
 
 # run Trimmomatic without adapter removal
 no_adapter_input_list=("B" "C" "D" "E"
-        "F" "G" "H" "I" "K"
+        "F" "G" "H" "I"
         "L" "N" "P" "Q" "T")
 for x in "${no_adapter_input_list[@]}"; do
     java -jar ${trimmomatic_install_dir}/Trimmomatic-0.39/trimmomatic-0.39.jar \
