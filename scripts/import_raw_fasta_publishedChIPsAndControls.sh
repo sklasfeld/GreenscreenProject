@@ -82,17 +82,17 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR228/007/ERR2286787/ERR2286787.fastq.g
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR228/008/ERR2286788/ERR2286788.fastq.gz
 # FD_ft10_tsf1_S_2019 Mock Control Rep 1
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR228/009/ERR2286789/ERR2286789.fastq.gz
-# TFL1_S_2020 ChIP-Seq Rep 1
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/000/ERR2820080/ERR2820080.fastq.gz
-# TFL1_S_2020 ChIP-Seq Rep 2
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/001/ERR2820081/ERR2820081.fastq.gz
-# TFL1_S_2020 ChIP-Seq Rep 3
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/002/ERR2820082/ERR2820082.fastq.gz
 # TFL1_S_2020 Mock Control Rep 1
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/003/ERR2820083/ERR2820083.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/000/ERR2820080/ERR2820080.fastq.gz
 # TFL1_S_2020 Mock Control Rep 2
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/004/ERR2820084/ERR2820084.fastq.gz
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/001/ERR2820081/ERR2820081.fastq.gz
 # TFL1_S_2020 Mock Control Rep 3
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/002/ERR2820082/ERR2820082.fastq.gz
+# TFL1_S_2020 ChIP-Seq Rep 1
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/003/ERR2820083/ERR2820083.fastq.gz
+# TFL1_S_2020 ChIP-Seq Rep 2
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/004/ERR2820084/ERR2820084.fastq.gz
+# TFL1_S_2020 ChIP-Seq Rep 3
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/005/ERR2820085/ERR2820085.fastq.gz
 # LFY_P_2011 ChIP-Seq Rep 1
 fastq-dump SRR070384
