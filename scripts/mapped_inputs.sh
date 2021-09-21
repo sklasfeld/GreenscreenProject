@@ -2,6 +2,10 @@
 
 nthreads=2
 PICARD_PATH="/usr/src/picard/build/libs"
+
+# create output directory
+mkdir -p mapped/input
+
 input_list=("A" "B" "C" "D" "E"
         "F" "G" "H" "I" "J" "K"
         "L" "M" "N" "O" "P" "Q"
@@ -25,11 +29,12 @@ for x in "${input_list[@]}"; do
     samtools index mapped/input/input${x}.filter.bam
     # mark duplicates with picard
     java -jar ${PICARD_PATH}/picard.jar MarkDuplicates \
-        I=mapped/input/input${x}.filter.bam \
-        O=mapped/input/input${x}.dupmark.bam \
-        M=mapped/input/input${x}.dup.qc \
-        VALIDATION_STRINGENCY=LENIENT \
-        REMOVE_DUPLICATES=false ASSUME_SORTED=true
+        -I mapped/input/input${x}.filter.bam \
+        -O mapped/input/input${x}.dupmark.bam \
+        -M mapped/input/input${x}.dup.qc \
+        -VALIDATION_STRINGENCY LENIENT \
+        -REMOVE_DUPLICATES false \
+	-ASSUME_SORTED true
     # sort reads after marking the duplicates
     samtools sort -o mapped/input/input${x}.dupmark.sorted.bam \
         mapped/input/input${x}.dupmark.bam
