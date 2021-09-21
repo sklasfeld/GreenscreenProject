@@ -57,21 +57,19 @@ See supplemental methods for more detailed information.
 		
 	c. Output Location: mapped/input
 
-6. `scripts/predictd_inputs.sh`
+7. `scripts/translateUniCodeFile.py`
 
-	a. Purpose: batch measure strand bias with macs2 predictd
-	
-	b. Steps:
-	
-		i. Run macs2 predictd
-		
-		ii. Run Rscript output from macs2 predictd
-		
-		iii. Put the pdf output from the Rscript into the correct directory
-		
-	c. Output Location: data/plotStrandBias/inputs
+	a. Purpose: translate files that contain percent unicode symbols
 
-7. `scripts/macs2_callpeaks_inputs.sh`
+8. `scripts/measureContigLengthFromFasta.sh`
+
+	a. Purpose: Calculate genome contig sizes
+
+9. `scripts/ChIPQC.R`
+	
+	a. Purpose: returns ChIP-Seq quality control metrics
+
+9. `scripts/macs2_callpeaks_inputs.sh`
 	
 	a. Purpose: batch call peaks in each input with MACS2
 	
@@ -85,7 +83,7 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: data/macs2_out/inputControls
 	
-8. `scripts/generate_20input_greenscreenBed.sh`
+10. `scripts/generate_20input_greenscreenBed.sh`
 	
 	a. Purpose: batch generate greenscreen from peaks called in 20 individual inputs
 	
@@ -161,25 +159,23 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: mapped/chip
 
-6. `scripts/predictd_publishedChIPsAndControls.sh`
+6. `scripts/ChIPQC.R` (repeat)
 	
-	a. Purpose: batch measure strand bias with macs2 predictd
+	a. Purpose: returns ChIP-Seq quality control metrics
+
+7. `scripts/ChIPQC_gsMaskReads_publishedChIPsAndControls.sh`
 	
-	b. Meta Requirement: meta/chip_controls_sampleIDs.list
+	a. Purpose: call ChIPQC library on each ChIP-Seq experiment
+	
+	b. Meta Requirement: meta/gsMaskReads_publishedChIPsAndControls_sampleSheet.csv
 	
 	c. Steps:
 		
-		i. Run macs2 predictd
+		i. mask reads that overlap greenscreen in each ChIP-Seq and control experiment
 		
-		ii. Run Rscript output from macs2 predictd
+		ii. Run ChIPQC library commands on each sample
 		
-		iii. Put the pdf output from the Rscript into the correct directory
-	
-	d. Output Location: data/plotStrandBias/chip
-
-7. `ChIPQC.R`
-	
-	a. Purpose: returns ChIP-Seq quality control metrics
+	d. Output Location: data/ChIPQCreport/chip_gsMask_wiDups
 
 8. `scripts/chipReplicates_BamToBigwig.sh`
 	
@@ -230,5 +226,58 @@ See supplemental methods for more detailed information.
 		i. Run macs2 callpeaks
 		
 		ii. Filter peaks by average log10 q-value (10)
+
+		iii. Remove peaks that overlap greenscreen regions
 	
-	c. Output Location: data/macs2_out/chipPeaks/qval10
+	c. Output Location: data/macs2_out/chipPeaks/gsMask_qval10
+
+# 1.5 ChIP-Seq Analysis
+## Annotate LFY ChIP-Seq Peaks
+
+1. `scripts/generateGeneBedFile.sh`
+
+	a. Purpose: Given the Arabidopsis genome annotation, export ALL protein-coding
+	and miRNA gene locations in BED-format
+
+	b. Output Location: meta/ArabidopsisGenome/Araport11_GFF3_nonHypothetical_proteinCoding_miRNA_genes.201606.bed
+
+2.`scripts/generateLFYDependentGeneBedFile.sh`
+
+	a. Purpose: Given the Arabidopsis genome annotation, export protein-coding
+	and miRNA gene locations in BED-format of genes that were found differentially
+	expressed after LFY gene expression
+
+	b. Output Location: scripts/generateLFYDependentGeneBedFile.sh
+
+3. `scripts/annotate_LFY_peaks.sh`
+
+	a. Purpose: Annotate LFY peaks from Jin 2021
+
+	b. Steps
+
+		i. First annotate all peaks to the closest genes of which peaks are upstream of genes. Peaks should be at most 3kb upstream of a genes. (round1 annotation)
+
+		ii. Of peaks not annotated in the previous step (orphan peaks), annotate to genes within 10kb that are differentially expressed in the presence of LFY (round2 annotation)
+	
+	c. Output Location: data/annotations/LFY_Jin_2021/lfy_summits_ann.tsv
+## Compare ChIP-Seq samples from different publications
+
+1. `scripts/merge_chip_peaks.sh`
+
+	a. Purpose: peaks called in each ChIP-seq experiment replicate are concatonated and merged
+
+	b. Output Location: data/macs2_out/chipPeaks/gsMask_qval10/ChIPseq_Peaks.merged.bed
+
+2. `scripts/coverage_bed_matrix.py`
+
+	a. Purpose: Given specific regions and multiple bigwig files, 
+	generate a signal matrix where each row represents a specific
+	region and each column represents a sequencing experiment
+
+3. `scripts/readCorrelationPlot.py`
+
+	a. Purpose: Given a signal matrix where each row represents a specific
+        region and each column represents a sequencing experiment, calculate
+	a correlation coefficient between samples and display these values in 
+	a heatmap sorted using hierarchical clustering. Optional: calculate 
+	rand-index values given expected clusters
