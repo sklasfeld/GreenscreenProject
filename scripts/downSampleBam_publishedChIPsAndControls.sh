@@ -18,7 +18,8 @@ downsamp (){
   idir="$1"
   odir="$2"
   sampl="$3"
-   
+  n="$4"
+
   # get header for output sam file
   samtools view -H \
     ${idir}/${sampl}.dupmark.sorted.bam \
@@ -61,7 +62,7 @@ minIndex(){
 # with a single replicate
 single_rep=("FD_S_2019_Mock" 
 "FD_ft10_tsf1_S_2019_Mock")
-for samp in "${pool_two[@]}"; do
+for samp in "${single_rep[@]}"; do
   cp ${in_dir}/${samp}_R1.dupmark.sorted.bam \
     ${out_dir}/${samp}_R1.dupmark.sorted.bam
 done
@@ -71,8 +72,8 @@ pool_two=("FD_W_2020" "TFL1_A_W_2020"
   "TFL1_B_W_2020" "TFL1_fd_W_2020"
   "LFY_P_2016" "FD_S_2019" 
   "FD_ft10_tsf1_S_2019" "LFY_P_2011"
-  "FD_C_2020" "TFL1_FD_Mock_2020" 
-  "TFL1_fd_W_2020_Mock" 
+  "FD_C_2020" "TFL1_FD_W_2020_Mock" 
+  "TFL1_fd_W_2020_Mock"
   "LFY_P_2016_Mock" "LFY_P_2011_Input"
   "FD_C_2020_Input")
 for samp in "${pool_two[@]}"; do
@@ -82,8 +83,8 @@ for samp in "${pool_two[@]}"; do
     ${in_dir}/${samp}_R2.dupmark.sorted.bam`
   arrName=(${depth1} ${depth2})
   minIndex "${arrName[@]}"
+  let "min_idx = $min_idx + 1"
   for (( rep=1; rep<=2; rep++ )); do
-    let "min_idx = $min_idx + 1"
     if [[ ${min_idx} -eq ${rep} ]]; then
         # copy this replicate which
         # has the smallest read depth
@@ -91,7 +92,7 @@ for samp in "${pool_two[@]}"; do
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     else
       # downsample these replicates
-      downsamp ${in_dir} ${out_dir} ${samp}_R${rep}
+      downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
     fi
   done
 done
@@ -109,8 +110,8 @@ for samp in "${pool_three[@]}"; do
     ${in_dir}/${samp}_R3.dupmark.sorted.bam`
   arrName=(${depth1} ${depth2} ${depth3})
   minIndex "${arrName[@]}"
+  let "min_idx = $min_idx + 1"
   for (( rep=1; rep<=3; rep++ )); do
-    let "min_idx = $min_idx + 1"
     if [[ ${min_idx} -eq ${rep} ]]; then
         # copy this replicate which
         # has the smallest read depth
@@ -118,13 +119,13 @@ for samp in "${pool_three[@]}"; do
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     else
       # downsample these replicates
-      downsamp ${in_dir} ${out_dir} ${samp}_R${rep}
+      downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
     fi
   done
 done
 
 # down-sample given four reps
-pool_four=("TFL1_FD_fd_2020_Input")
+pool_four=("TFL1_FD_fd_W_2020_Input")
 for samp in "${pool_four[@]}"; do
   depth1=`samtools view -c \
     ${in_dir}/${samp}_R1.dupmark.sorted.bam`
@@ -136,8 +137,8 @@ for samp in "${pool_four[@]}"; do
     ${in_dir}/${samp}_R4.dupmark.sorted.bam`
   arrName=(${depth1} ${depth2} ${depth3} ${depth4})
   minIndex "${arrName[@]}"
+  let "min_idx = $min_idx + 1"
   for (( rep=1; rep<=4; rep++ )); do
-    let "min_idx = $min_idx + 1"
     if [[ ${min_idx} -eq ${rep} ]]; then
         # copy this replicate which
         # has the smallest read depth
@@ -145,7 +146,7 @@ for samp in "${pool_four[@]}"; do
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     else
       # downsample these replicates
-      downsamp ${in_dir} ${out_dir} ${samp}_R${rep}
+      downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
     fi
   done
 done
