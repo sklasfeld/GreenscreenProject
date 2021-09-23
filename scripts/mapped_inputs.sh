@@ -13,7 +13,8 @@ input_list=("A" "B" "C" "D" "E"
 
 for x in "${input_list[@]}"; do
     # run bowtie2
-    bowtie2 -x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
+    bowtie2  --phred33 -q \
+	-x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
         -S mapped/input/input${x}.sam \
         fastq/trimmed/input${x}.trimmed.fastq
     # sort the reads
@@ -22,8 +23,9 @@ for x in "${input_list[@]}"; do
     # index the bam file
     samtools index mapped/input/input${x}.bam
     # remove reads without MAPQ>=30
-    samtools view -@ ${nthreads} -F 1796 -q 30 \
-        -b mapped/input/input${x}.bam | \
+    samtools view -@ ${nthreads} -F 772 -q 30 \
+        -b mapped/input/input${x}.bam \
+	Chr1 Chr2 Chr3 Chr4 Chr5 | \
         samtools sort - -o mapped/input/input${x}.filter.bam
     # index filtered reads
     samtools index mapped/input/input${x}.filter.bam

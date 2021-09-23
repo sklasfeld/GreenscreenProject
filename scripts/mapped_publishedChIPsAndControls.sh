@@ -8,7 +8,8 @@ mkdir -p mapped/chip
 
 while read samp; do
     # run bowtie2
-    bowtie2 -x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
+    bowtie2  --phred33 -q \
+	-x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
         -S mapped/chip/${samp}.sam \
         fastq/trimmed/${samp}.trimmed.fastq.gz
     # sort the reads
@@ -17,8 +18,9 @@ while read samp; do
     # index the bam file
     samtools index mapped/chip/${samp}.bam \
     # remove reads without MAPQ>=30
-    samtools view -@ ${nthreads} -F 1796 -q 30 \
-        -b mapped/chip/${samp}.bam | \
+    samtools view -@ ${nthreads} -F 772 -q 30 \
+        -b mapped/chip/${samp}.bam \
+	Chr1 Chr2 Chr3 Chr4 Chr5 | \
         samtools sort - -o mapped/chip/${samp}.filter.bam
     # index filtered reads
     samtools index mapped/chip/${samp}.filter.bam
