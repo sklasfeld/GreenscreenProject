@@ -37,7 +37,8 @@ downsamp (){
   # convert the sam file to bam format
   samtools sort -O BAM \
     ${odir}/${sampl}.dupmark.sorted.sam \
-    > ${odir}/${sampl}.dupmark.sorted.bam
+    > ${odir}/${sampl}.dupmark.sorted.bam \
+    && rm ${odir}/${sampl}.dupmark.sorted.sam
   samtools index \
     ${odir}/${sampl}.dupmark.sorted.bam
 }
@@ -65,6 +66,8 @@ single_rep=("FD_S_2019_Mock"
 for samp in "${single_rep[@]}"; do
   cp ${in_dir}/${samp}_R1.dupmark.sorted.bam \
     ${out_dir}/${samp}_R1.dupmark.sorted.bam
+  cp ${in_dir}/${samp}_R1.dupmark.sorted.bam.bai \
+    ${out_dir}/${samp}_R1.dupmark.sorted.bam.bai
 done
 
 # down-sample given two reps
@@ -90,6 +93,8 @@ for samp in "${pool_two[@]}"; do
         # has the smallest read depth
         cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam \
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
+        cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai \
+          ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai
     else
       # downsample these replicates
       downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
@@ -117,6 +122,8 @@ for samp in "${pool_three[@]}"; do
         # has the smallest read depth
         cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam \
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
+        cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai \
+          ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai
     else
       # downsample these replicates
       downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}

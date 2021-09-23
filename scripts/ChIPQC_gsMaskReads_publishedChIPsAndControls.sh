@@ -30,7 +30,7 @@ done < meta/gsMaskReads_publishedChIPsAndControls_sampleSheet.csv
 # 2. Run ChIPQC
 
 # create an output directory for ChIPQC results
-mkdir -p data/ChIPQCreport/chip_gsMask_wiDups
+mkdir -p data/ChIPQCreport/chip_gsMask
 
 Rscript scripts/ChIPQC.R \
     -f Replicate -c Factor \
@@ -39,4 +39,4 @@ Rscript scripts/ChIPQC.R \
     -a meta/ArabidopsisGenome/Araport11_GFF3_genes_transposons.201606.gff \
     -s meta/ArabidopsisGenome/TAIR10_chr_count.txt \
     gsMaskReads_publishedChIPsAndControls_sampleSheet.csv \
-    data/ChIPQCreport/chip_gsMask_wiDups
+    data/ChIPQCreport/chip_gsMask
