@@ -6,7 +6,9 @@ normalizeby=10000000 # scaling factor
 
 while read line; do
     samp=$(echo $line | cut -d "," -f1)
-    extend=$(echo $line | cut -d "," -f2)
+    readSize=$(echo $line | cut -d "," -f2)
+    fragSize=$(echo $line | cut -d "," -f3)
+    extend=`awk -v f=${fragSize} -v r=${readSize} 'BEGIN{print f-r}'`
     orig_bam="${working_dir}/${samp}.dupmark.sorted.bam"
     # convert BAM to BED format
     bamToBed \
@@ -26,7 +28,7 @@ while read line; do
     # normalize signal and output BEDGRAPH
     totreads=`samtools view -c ${orig_bam}`
     scaling=`awk 'BEGIN{ print '"$normalizeby"' / '"$totreads"'}'`
-    
+
     genomeCoverageBed -i \
       ${working_dir}/${samp}.extend.bed \
       -g ${genome} -bg -scale $scaling | \
@@ -37,4 +39,4 @@ while read line; do
     # compress BEDGRAPH to BIGWIG FORMAT
     bedGraphToBigWig ${working_dir}/${samp}.bg \
       ${genome} ${working_dir}/${samp}.bw
-done < meta/chipFragSize.csv
+done < meta/chip_readsize_fragsize.csv

@@ -69,7 +69,14 @@ See supplemental methods for more detailed information.
 	
 	a. Purpose: returns ChIP-Seq quality control metrics
 
-9. `scripts/macs2_callpeaks_inputs.sh`
+10. `scripts/input_BamToBigwig.sh`
+
+	a. Purpose: convert mapped reads into compressed bigwig files 
+	to use for IGV visualization of the signals
+
+	b. Output Location: data/
+
+11. `scripts/macs2_callpeaks_inputs.sh`
 	
 	a. Purpose: batch call peaks in each input with MACS2
 	
@@ -83,7 +90,7 @@ See supplemental methods for more detailed information.
 	
 	d. Output Location: data/macs2_out/inputControls
 	
-10. `scripts/generate_20input_greenscreenBed.sh`
+12. `scripts/generate_20input_greenscreenBed.sh`
 	
 	a. Purpose: batch generate greenscreen from peaks called in 20 individual inputs
 	

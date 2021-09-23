@@ -4,15 +4,85 @@ MAINTAINER Samantha Klasfeld <sjk314@gmail.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+#install dependencies 
+
+RUN apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
+    bash-completion ca-certificates file \
+    fonts-texgyre g++ gfortran gsfonts \
+    libblas-dev libcurl3-dev libcurl4 \
+    liblapack-dev liblzma5 liblzma-dev libncurses5-dev \
+    libopenblas-dev libpangocairo-1.0-0 libpcre3 libpng16-16 \
+    libssl-dev libssl-doc libtiff5 \
+    libxml2-dev locales make tar unzip wget curl zip \
+    zlib1g zlib1g-dev && \
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && locale-gen en_US.utf8 \
+    && /usr/sbin/update-locale LANG=en_US.UTF-8 \
+    > /dev/null
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    default-jdk libbz2-dev \
+    libcairo2-dev libcurl4-openssl-dev \
+    libpango1.0-dev libjpeg-dev \
+    libicu-dev libpcre3-dev \
+    libpng-dev libreadline-dev libtiff5-dev \
+    liblzma-dev libx11-dev librsvg2-bin libv8-dev \
+    libxt-dev perl tcl8.6-dev tk8.6-dev \
+    texinfo texlive-extra-utils texlive-fonts-recommended \
+    texlive-fonts-extra texlive-latex-recommended \
+    texlive-latex-base texlive-latex-extra \
+    x11proto-core-dev xauth xfonts-base \
+    xvfb zlib1g-dev >> /dev/null
+
+# install R
+
+WORKDIR /tmp
+
+RUN wget https://cran.r-project.org/src/base/R-4/R-4.0.0.tar.gz
+
+RUN tar -xf R-4.0.0.tar.gz
+
+WORKDIR /tmp/R-4.0.0
+
+## set R compiler flags
+RUN R_PAPERSIZE=letter \
+    R_BATCHSAVE="--no-save --no-restore" \
+    R_BROWSER=xdg-open \
+    PAGER=/usr/bin/pager \
+    PERL=/usr/bin/perl \
+    R_UNZIPCMD=/usr/bin/unzip \
+    R_ZIPCMD=/usr/bin/zip \
+    R_PRINTCMD=/usr/bin/lpr \
+    LIBnn=lib \
+    AWK=/usr/bin/awk \
+    CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g" \
+    CXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g"
+
+
+RUN /tmp/R-4.0.0/configure --enable-R-shlib \
+               --enable-memory-profiling \
+               --with-readline \
+               --with-blas \
+               --with-tcltk \
+               --disable-nls \
+               --with-recommended-packages \
+               --with-x=no \
+    && make \
+    && make install
+
+RUN apt-get clean && apt-get purge && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    >> /dev/null
+
+# import python & other useful software
 RUN apt-get update --fix-missing && \
 	apt-get install -y --no-install-recommends \
-	build-essential zip wget git \
+	build-essential gzip git \
 	default-jre bedtools \
-	r-base r-cran-randomforest \
 	python3.6 python3-pip python3-setuptools python3-dev \
-	vim nano less \
-	libncurses5-dev zlib1g-dev libbz2-dev \
-	liblzma-dev libcurl3-dev libxml2-dev && \
+	vim nano less rsync && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 	
@@ -21,7 +91,72 @@ ENV DEST=/usr/src
 
 WORKDIR $DEST
 
+# install KentUtils
+
+RUN mkdir kentUtils
+
+WORKDIR $DEST/kentUtils
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedCoverage ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedExtendRanges ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedGraphToBigWig ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedIntersect ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedSort ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bedToBigBed ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bigWigAverageOverBed ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bigWigMerge ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bigWigSummary ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bigWigToBedGraph ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/bigWigToWig  ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/faAlign  ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/faCount  ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/faOneRecord  ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/faSize  ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/faSplit  ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/fetchChromSizes ./
+
+RUN rsync -aP \
+   rsync://hgdownload.soe.ucsc.edu/genome/admin/exe/linux.x86_64/wigToBigWig  ./
+
+ENV PATH=${PATH}:/usr/src/kentUtils
+
 # install SRA toolkit
+
+WORKDIR $DEST
+
 RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz && \
 	tar -xzvf sratoolkit.current-ubuntu64.tar.gz
 
@@ -62,6 +197,8 @@ WORKDIR $DEST/picard
 
 RUN $DEST/picard/gradlew shadowJar
 
+ENV PATH=${PATH}:/usr/src/picard/build/libs
+
 # reset working directory
 
 WORKDIR /
@@ -72,18 +209,6 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
-
-# install R libraries
-
-RUN Rscript -e "install.packages('argparse')"
-
-RUN Rscript -e "install.packages('BiocManager')"
-
-RUN Rscript -e "BiocManager::install('ChIPQC')"
-
-RUN Rscript -e "BiocManager::install('GenomicFeatures')"
-
-RUN Rscript -e "BiocManager::install('GenomicRanges')"
 
 # copy scripts and helper meta information into container
 
