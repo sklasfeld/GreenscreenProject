@@ -72,6 +72,7 @@ pubControl_list=("TFL1_FD_fd_W_2020_Input_R1" "TFL1_FD_fd_W_2020_Input_R2"
 for replicate in "${pubControl_list[@]}"; do
     samp=$(echo $replicate| awk -F"_" '{rep=$NF; sub("_"rep,"",$0); print $0}')
     if [[ ! -f ${outdir}/${samp}.bigwig ]]; then
+        if [[ ! -f ${outdir}/${replicate}.bg ]]; then
             orig_bam="${indir}/${replicate}.dupmark.sorted.bam"
 
             # normalize signal and output BEDGRAPH
@@ -94,7 +95,7 @@ pool_one=("FD_ft10_tsf1_S_2019_Mock" "FD_S_2019_Mock")
 for samp in "${pool_one[@]}"; do
     if [[ ! -f ${outdir}/${samp}.bigwig ]]; then
         cp ${outdir}/${samp}_R1.bg \
-		${outdir}/${samp}.bigwig
+        ${outdir}/${samp}.bigwig
     fi
 done
 
