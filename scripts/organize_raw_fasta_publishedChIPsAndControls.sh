@@ -1,15 +1,7 @@
-raw_file=""
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	#!/bin/bash
-fi
-raw_file=""
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	
-fi
+#!/bin/bash
+
+mkdir -p fastq/raw
+
 raw_file="SRR10676619.fastq"
 if [ ! -f "$raw_file"]; then
 	echo "ERROR: File ${raw_file} does not exist"
@@ -26,25 +18,25 @@ raw_file="SRR10676621.fastq"
 if [ ! -f "$raw_file"]; then
 	echo "ERROR: File ${raw_file} does not exist"
 else
-	gzip -c SRR10676621.fastq > fastq/raw/TFL1_A_W_2020_R1.fastq.gz && rm SRR10676621.fastq
+	gzip -c SRR10676621.fastq > fastq/raw/TFL1_W_2020_R1.fastq.gz && rm SRR10676621.fastq
 fi
 raw_file="SRR10676622.fastq"
 if [ ! -f "$raw_file"]; then
 	echo "ERROR: File ${raw_file} does not exist"
 else
-	gzip -c SRR10676622.fastq > fastq/raw/TFL1_A_W_2020_R2.fastq.gz && rm SRR10676622.fastq
+	gzip -c SRR10676622.fastq > fastq/raw/TFL1_W_2020_R2.fastq.gz && rm SRR10676622.fastq
 fi
 raw_file="SRR10676623.fastq"
 if [ ! -f "$raw_file"]; then
 	echo "ERROR: File ${raw_file} does not exist"
 else
-	gzip -c SRR10676623.fastq > fastq/raw/TFL1_B_W_2020_R1.fastq.gz && rm SRR10676623.fastq
+	gzip -c SRR10676623.fastq > fastq/raw/TFL1_W_2020_R3.fastq.gz && rm SRR10676623.fastq
 fi
 raw_file="SRR10676624.fastq"
 if [ ! -f "$raw_file"]; then
 	echo "ERROR: File ${raw_file} does not exist"
 else
-	gzip -c SRR10676624.fastq > fastq/raw/TFL1_B_W_2020_R2.fastq.gz && rm SRR10676624.fastq
+	gzip -c SRR10676624.fastq > fastq/raw/TFL1_W_2020_R4.fastq.gz && rm SRR10676624.fastq
 fi
 raw_file="SRR10676625.fastq"
 if [ ! -f "$raw_file"]; then

@@ -4,13 +4,13 @@
 fastq-dump SRR10676619
 # FD_W_2020 ChIP-Seq Rep 2
 fastq-dump SRR10676620
-# TFL1_A_W_2020 ChIP-Seq Rep 1
+# TFL1_W_2020 ChIP-Seq Rep 1
 fastq-dump SRR10676621
-# TFL1_A_W_2020 ChIP-Seq Rep 2
+# TFL1_W_2020 ChIP-Seq Rep 2
 fastq-dump SRR10676622
-# TFL1_B_W_2020 ChIP-Seq Rep 1
+# TFL1_W_2020 ChIP-Seq Rep 3
 fastq-dump SRR10676623
-# TFL1_B_W_2020 ChIP-Seq Rep 2
+# TFL1_W_2020 ChIP-Seq Rep 4
 fastq-dump SRR10676624
 # TFL1_fd_W_2020 ChIP-Seq Rep 1
 fastq-dump SRR10676625

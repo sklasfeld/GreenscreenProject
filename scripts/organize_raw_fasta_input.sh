@@ -1,139 +1,231 @@
 #!/bin/bash
 
-# create output directory
-mkdir -p fastq/raw
+outdir="fastq/raw"
+mkdir -p ${outdir}
 
-# compress, move, and rename fastq sequence files
-raw_file="SRR8180351.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR8180351.fastq > fastq/raw/inputA.fastq.gz && rm SRR8180351.fastq
+x="A"
+raw_f="SRR8180351.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c SRR8180351.fastq > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR402844.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR402844.fastq > fastq/raw/inputB.fastq.gz && rm SRR402844.fastq
+
+x="B"
+raw_f="SRR402844.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR6042861.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR6042861.fastq > fastq/raw/inputC.fastq.gz && rm SRR6042861.fastq
+
+x="C"
+raw_f="SRR6042861.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR8742331.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR8742331.fastq > fastq/raw/inputD.fastq.gz && rm SRR8742331.fastq
+
+x="D"
+raw_f="SRR8742331.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR5011169.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR5011169.fastq > fastq/raw/inputE.fastq.gz && rm SRR5011169.fastq
+
+x="E"
+raw_f="SRR5011169.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR8365023.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR8365023.fastq > fastq/raw/inputF.fastq.gz && rm SRR8365023.fastq
+
+x="F"
+raw_f="SRR8365023.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR6435271.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR6435271.fastq > fastq/raw/inputG.fastq.gz && rm SRR6435271.fastq
+
+x="G"
+raw_f="SRR6435271.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR7646290.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR7646290.fastq > fastq/raw/inputH.fastq.gz && rm SRR7646290.fastq
+
+x="H"
+raw_f="SRR7646290.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR8890665.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR8890665.fastq > fastq/raw/inputI.fastq.gz && rm SRR8890665.fastq
+
+x="I"
+raw_f="SRR8890665.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file1="SRR7224610.fastq"
-raw_file2="SRR7224611.fastq"
-raw_file3="SRR7224612.fastq"
-if [ ! -f "$raw_file1"]; then
-	echo "ERROR: File ${raw_file1} does not exist"
-elif [ ! -f "$raw_file2"]; then
-	echo "ERROR: File ${raw_file2} does not exist"
-elif [ ! -f "$raw_file3"]; then
-	echo "ERROR: File ${raw_file3} does not exist"
-else
-	cat SRR7224610.fastq SRR7224611.fastq SRR7224612.fastq > SRX4131135.fastq \
-	&& rm SRR7224610.fastq SRR7224611.fastq SRR7224612.fastq
+
+x="J"
+raw_f1="SRR7224610.fastq"
+raw_f2="SRR7224611.fastq"
+raw_f3="SRR7224612.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f1" && -f "$raw_f2" && -f "$raw_f3" && ! -f "$gzip_f" ]]; then
+	cat ${raw_f1} ${raw_f2} ${raw_f3} \\
+		> fastq/raw/input${x}.fastq && \
+		rm ${raw_f1} ${raw_f2} ${raw_f3}
+	gzip -c fastq/raw/input${x}.fastq > ${gzip_f} \\
+		&& rm fastq/raw/input${x}.fastq
+elif [[ ! -f "$raw_f1" || -f "$raw_f2" || -f "$raw_f3" ]]; then
+	if [[ ! -f "$gzip_f"  ]]; then
+		echo "ERROR: Cannot Find File(s): SRR7224610.fastq, SRR7224611.fastq, SRR7224612.fastq"
+		exit
+	fi
 fi
-raw_file="SRX4131135.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRX4131135.fastq > fastq/raw/inputJ.fastq.gz && rm SRX4131135.fastq
+
+x="K"
+raw_f="SRR2085420.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR2085420.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR2085420.fastq > fastq/raw/inputK.fastq.gz && rm SRR2085420.fastq
+
+x="L"
+raw_f="SRR394081.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR394081.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR394081.fastq > fastq/raw/inputL.fastq.gz && rm SRR394081.fastq
+
+x="M"
+raw_f="SRR5681375.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR5681375.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR5681375.fastq > fastq/raw/inputM.fastq.gz && rm SRR5681375.fastq
+
+x="N"
+raw_f="SRR6768681.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR6768681.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR6768681.fastq > fastq/raw/inputN.fastq.gz && rm SRR6768681.fastq
+
+x="O"
+raw_f="SRR6989574.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR6989574.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR6989574.fastq > fastq/raw/inputO.fastq.gz && rm SRR6989574.fastq
+
+x="P"
+raw_f="SRR7264106.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR7264106.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR7264106.fastq > fastq/raw/inputP.fastq.gz && rm SRR7264106.fastq
+
+x="Q"
+raw_f="SRR988541.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR988541.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR988541.fastq > fastq/raw/inputQ.fastq.gz && rm SRR988541.fastq
+
+x="R"
+raw_f="SRR5813676.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR5813676.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR5813676.fastq > fastq/raw/inputR.fastq.gz && rm SRR5813676.fastq
+
+x="S"
+raw_f="SRR866865.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi
-raw_file="SRR866865.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR866865.fastq > fastq/raw/inputS.fastq.gz && rm SRR866865.fastq
-fi
-raw_file="SRR1191642.fastq"
-if [ ! -f "$raw_file"]; then
-	echo "ERROR: File ${raw_file} does not exist"
-else
-	gzip -c SRR1191642.fastq > fastq/raw/inputT.fastq.gz && rm SRR1191642.fastq
+
+x="T"
+raw_f="SRR1191642.fastq"
+gzip_f="${outdir}/input${x}.fastq.gz"
+if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	gzip -c ${raw_f} > ${gzip_f} \\
+		&& rm ${raw_f}
+elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
+	echo "ERROR: Cannot Find File: ${raw_f}"
+	exit
 fi

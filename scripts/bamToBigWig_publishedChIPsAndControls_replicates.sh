@@ -1,8 +1,11 @@
 #!/bin/bash
 
 genome="meta/ArabidopsisGenome/TAIR10_chr_count.txt"
-working_dir="mapped/chip"
+indir="mapped/chip"
+outdir="data/bigwigs/chip/individual_replicates"
 normalizeby=10000000 # scaling factor
+
+mkdir -p ${outdir}
 
 # ChIP-Seq samples
 
@@ -11,36 +14,36 @@ while read line; do
     readSize=$(echo $line | cut -d "," -f2)
     fragSize=$(echo $line | cut -d "," -f3)
     extend=`awk -v f=${fragSize} -v r=${readSize} 'BEGIN{print f-r}'`
-    orig_bam="${working_dir}/${samp}.dupmark.sorted.bam"
+    orig_bam="${indir}/${samp}.dupmark.sorted.bam"
     # convert BAM to BED format
     bamToBed \
       -i ${orig_bam} \
-      > ${working_dir}/${samp}.bed
+      > ${outdir}/${samp}.bed
 
     # sort the BED file
     sort -k 1,1 \
-      ${working_dir}/${samp}.bed > \
-      ${working_dir}/${samp}.sorted.bed
+      ${outdir}/${samp}.bed > \
+      ${outdir}/${samp}.sorted.bed
 
     # extend the reads
-    slopBed -i ${working_dir}/${samp}.sorted.bed \
+    slopBed -i ${outdir}/${samp}.sorted.bed \
       -l 0 -r ${extend} -s -g ${genome} \
-      > ${working_dir}/${samp}.extend.bed
+      > ${outdir}/${samp}.extend.bed
 
     # normalize signal and output BEDGRAPH
     totreads=`samtools view -c ${orig_bam}`
     scaling=`awk 'BEGIN{ print '"$normalizeby"' / '"$totreads"'}'`
 
     genomeCoverageBed -i \
-      ${working_dir}/${samp}.extend.bed \
+      ${outdir}/${samp}.extend.bed \
       -g ${genome} -bg -scale $scaling | \
       awk 'BEGIN{OFS=FS="\t"} \
       {$4=sprintf("%.2f",$4)}{print}' \
-      > ${working_dir}/${samp}.bg
+      > ${outdir}/${samp}.bg
 
     # compress BEDGRAPH to BIGWIG FORMAT
-    bedGraphToBigWig ${working_dir}/${samp}.bg \
-      ${genome} ${working_dir}/${samp}.bw
+    bedGraphToBigWig ${outdir}/${samp}.bg \
+      ${genome} ${outdir}/${samp}.bw
 done < meta/chip_readsize_fragsize.csv
 
 # published ChIP-Seq controls
@@ -60,7 +63,7 @@ pubControl_list=("TFL1_FD_fd_W_2020_Input_R1" "TFL1_FD_fd_W_2020_Input_R2"
 	"FD_C_2020_Input_R2")
 
 for samp in "${pubControl_list[@]}"; do
-    orig_bam="${working_dir}/${samp}.dupmark.sorted.bam"
+    orig_bam="${indir}/${samp}.dupmark.sorted.bam"
 
     # normalize signal and output BEDGRAPH
     totreads=`samtools view -c ${orig_bam}`
@@ -70,11 +73,11 @@ for samp in "${pubControl_list[@]}"; do
       -bg -scale $scaling | \
       awk 'BEGIN{OFS=FS="\t"} \
       {$4=sprintf("%.2f",$4)}{print}' \
-      > ${working_dir}/${samp}.bg
+      > ${outdir}/${samp}.bg
 
     # compress BEDGRAPH to BIGWIG FORMAT
-    bedGraphToBigWig ${working_dir}/${samp}.bg \
-      ${genome} ${working_dir}/${samp}.bw \
-    && rm ${working_dir}/${samp}.bg
+    bedGraphToBigWig ${outdir}/${samp}.bg \
+      ${genome} ${outdir}/${samp}.bw \
+    && rm ${outdir}/${samp}.bg
 done
 

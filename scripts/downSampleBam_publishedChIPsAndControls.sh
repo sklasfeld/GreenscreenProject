@@ -71,8 +71,7 @@ for samp in "${single_rep[@]}"; do
 done
 
 # down-sample given two reps
-pool_two=("FD_W_2020" "TFL1_A_W_2020"
-  "TFL1_B_W_2020" "TFL1_fd_W_2020"
+pool_two=("FD_W_2020" "TFL1_fd_W_2020"
   "LFY_P_2016" "FD_S_2019" 
   "FD_ft10_tsf1_S_2019" "LFY_P_2011"
   "FD_C_2020" "TFL1_FD_W_2020_Mock" 
@@ -132,7 +131,7 @@ for samp in "${pool_three[@]}"; do
 done
 
 # down-sample given four reps
-pool_four=("TFL1_FD_fd_W_2020_Input")
+pool_four=("TFL1_W_2020" "TFL1_FD_fd_W_2020_Input")
 for samp in "${pool_four[@]}"; do
   depth1=`samtools view -c \
     ${in_dir}/${samp}_R1.dupmark.sorted.bam`
