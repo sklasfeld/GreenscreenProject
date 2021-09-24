@@ -56,7 +56,7 @@ while read line; do
         t_pool_param="${t_down_rep}"
         for ((t=2; t<=${chip_nreps}; t++ )); do
                 t_down_rep="${downsamp_bam_dir}/${chip_name}_R${t}.${bam_suffix}"
-                t_pool_param="${t_pool_param} ${t_raw_rep}"
+                t_pool_param="${t_pool_param} ${t_down_rep}"
         done
         echo "-t ${t_pool_param}"
 
