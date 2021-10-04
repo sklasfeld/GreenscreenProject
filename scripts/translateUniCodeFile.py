@@ -8,6 +8,7 @@
 import sys
 import argparse
 from urllib.parse import unquote
+from w3lib.html import replace_entities
 
 parser = argparse.ArgumentParser(description="Translate \
     a file that contains unicode")
@@ -24,7 +25,7 @@ org_gff = open(args.infile, 'r')
 with open(args.infile) as org_gff:
     Lines = org_gff.readlines()
     for lines in Lines:
-        new_gff.write("%s\n" % unquote(lines).strip())
+        new_gff.write("%s\n" % replace_entities(unquote(lines).strip()))
 
 # Closing files
 org_gff.close()
