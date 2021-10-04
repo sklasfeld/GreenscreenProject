@@ -4,6 +4,7 @@ async-generator==1.10
 attrs==20.3.0
 Babel==2.9.1
 backcall==0.2.0
+backports.zoneinfo==0.2.1
 beautifulsoup4==4.9.3
 bleach==3.3.0
 bs4==0.0.1
@@ -66,6 +67,7 @@ pyBigWig==0.3.18
 pycparser==2.20
 Pygments==2.8.1
 pyparsing==2.4.7
+pyreadr==0.4.2
 pyrsistent==0.17.3
 pysam==0.16.0.1
 python-dateutil==2.8.1
@@ -74,6 +76,7 @@ pyzmq==22.0.3
 qtconsole==5.0.3
 QtPy==1.9.0
 requests==2.26.0
+rpy2==3.4.5
 scipy==1.6.3
 seaborn==0.11.1
 Send2Trash==1.5.0
@@ -93,7 +96,9 @@ terminado==0.9.4
 testpath==0.4.4
 tornado==6.1
 traitlets==5.0.5
+tzlocal==3.0
 urllib3==1.26.6
+w3lib==1.22.0
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
