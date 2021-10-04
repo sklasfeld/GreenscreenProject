@@ -63,6 +63,7 @@ prometheus-client==0.10.1
 prompt-toolkit==3.0.18
 ptyprocess==0.7.0
 py2bit==0.3.0
+pybedtools==0.8.2
 pyBigWig==0.3.18
 pycparser==2.20
 Pygments==2.8.1
