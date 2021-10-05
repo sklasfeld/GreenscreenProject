@@ -2,62 +2,8 @@
 
 in_dir="mapped/chip"
 out_dir="mapped/chip/downsample"
-
+JVARKIT_PATH="/usr/src/jvarkit"
 mkdir -p ${out_dir}
-
-# seed (this is set for reproducibility purposes)
-get_seeded_random()
-{
-  seed="$1"
-  openssl enc -aes-256-ctr -pass pass:"$seed" -nosalt \
-    </dev/zero 2>/dev/null
-}
-
-# function to down-sample reads
-downsamp (){
-  idir="$1"
-  odir="$2"
-  sampl="$3"
-  n="$4"
-
-  # get header for output sam file
-  samtools view -H \
-    ${idir}/${sampl}.dupmark.sorted.bam \
-    > ${odir}/${sampl}.dupmark.sorted.sam
-  # 1. convert bam file to human readable sam format
-  # 2. shuffle the reads
-  # 3. return the first  $n reads
-  samtools view \
-    ${idir}/${sampl}.dupmark.sorted.bam | \
-    shuf \
-    --random-source=<(get_seeded_random 42) - | \
-    head -n ${n} \
-    >> ${odir}/${sampl}.dupmark.sorted.sam
-
-  # convert the sam file to bam format
-  samtools sort -O BAM \
-    ${odir}/${sampl}.dupmark.sorted.sam \
-    > ${odir}/${sampl}.dupmark.sorted.bam \
-    && rm ${odir}/${sampl}.dupmark.sorted.sam
-  samtools index \
-    ${odir}/${sampl}.dupmark.sorted.bam
-}
-
-# function to find the minimum
-# value in an array
-minIndex(){
-   arr=("$@")
-   min_val=${arr[0]}
-   min_idx=0
-   for i in ${!arr[@]}; do
-        cur_val=${arr[${i}]}
-        if [[ ${cur_val} -lt ${min_val} ]]; then
-                min_val=${arr[$i]}
-                min_idx=${i}
-        fi
-   done
-
-}
 
 # There is no need to down-sample anything
 # with a single replicate
@@ -74,7 +20,7 @@ done
 pool_two=("FD_W_2020" "TFL1_fd_W_2020"
   "LFY_P_2016" "FD_S_2019" 
   "FD_ft10_tsf1_S_2019" "LFY_P_2011"
-  "FD_C_2020" "TFL1_FD_W_2020_Mock" 
+  "FD_C_2020" "TFL1_FD_WT_W_2020_Mock" 
   "TFL1_fd_W_2020_Mock"
   "LFY_P_2016_Mock" "LFY_P_2011_Input"
   "FD_C_2020_Input")
@@ -95,8 +41,11 @@ for samp in "${pool_two[@]}"; do
         cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai \
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai
     else
-      # downsample these replicates
-      downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
+        # downsample these replicates
+        java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
+            -n ${min_val} \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
 done
@@ -124,8 +73,11 @@ for samp in "${pool_three[@]}"; do
         cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai \
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam.bai
     else
-      # downsample these replicates
-      downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
+        # downsample these replicates
+        java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
+            -n ${min_val} \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
 done
@@ -151,8 +103,11 @@ for samp in "${pool_four[@]}"; do
         cp ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam \
           ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     else
-      # downsample these replicates
-      downsamp ${in_dir} ${out_dir} ${samp}_R${rep} ${min_val}
+        # downsample these replicates
+        java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
+            -n ${min_val} \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
 done
