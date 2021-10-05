@@ -85,6 +85,13 @@ RUN apt-get update --fix-missing && \
 	vim nano less rsync && \
 	apt-get clean && apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# install python libraries
+
+COPY requirements.txt ./
+
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
 	
 # destination to install specific softwares
 ENV DEST=/usr/src
@@ -213,13 +220,6 @@ ENV PATH=${PATH}:/usr/src/jvarkit/dist
 # reset working directory
 
 WORKDIR /
-
-# install python libraries
-
-COPY requirements.txt ./
-
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
 
 # copy scripts and helper meta information into container
 

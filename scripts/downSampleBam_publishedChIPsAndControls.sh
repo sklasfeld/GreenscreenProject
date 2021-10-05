@@ -46,6 +46,7 @@ for samp in "${pool_two[@]}"; do
             -n ${min_val} \
             -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
+	samtools index ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
 done
@@ -78,6 +79,7 @@ for samp in "${pool_three[@]}"; do
             -n ${min_val} \
             -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
+	samtools index ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
 done
@@ -108,6 +110,7 @@ for samp in "${pool_four[@]}"; do
             -n ${min_val} \
             -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
+	samtools index ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
 done
