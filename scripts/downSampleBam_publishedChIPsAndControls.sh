@@ -5,6 +5,23 @@ out_dir="mapped/chip/downsample"
 JVARKIT_PATH="/usr/src/jvarkit"
 mkdir -p ${out_dir}
 
+# function to find the minimum
+# value in an array
+minIndex(){
+   arr=("$@")
+   min_val=${arr[0]}
+   min_idx=0
+   for i in ${!arr[@]}; do
+        cur_val=${arr[${i}]}
+        if [[ ${cur_val} -lt ${min_val} ]]; then
+                min_val=${arr[$i]}
+                min_idx=${i}
+        fi
+   done
+
+}
+
+
 # There is no need to down-sample anything
 # with a single replicate
 single_rep=("FD_S_2019_Mock" 
