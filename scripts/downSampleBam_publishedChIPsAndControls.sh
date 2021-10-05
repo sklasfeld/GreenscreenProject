@@ -61,8 +61,12 @@ for samp in "${pool_two[@]}"; do
         # downsample these replicates
         java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
             -n ${min_val} \
-            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
+	samtools sort \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            ${out_dir}/${samp}_R${rep}.dupmark.bam && \
+            rm ${out_dir}/${samp}_R${rep}.dupmark.bam
 	samtools index ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
@@ -94,8 +98,12 @@ for samp in "${pool_three[@]}"; do
         # downsample these replicates
         java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
             -n ${min_val} \
-            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
+	samtools sort \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            ${out_dir}/${samp}_R${rep}.dupmark.bam && \
+            rm ${out_dir}/${samp}_R${rep}.dupmark.bam
 	samtools index ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
@@ -125,8 +133,12 @@ for samp in "${pool_four[@]}"; do
         # downsample these replicates
         java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
             -n ${min_val} \
-            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
+	samtools sort \
+            -o ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam \
+            ${out_dir}/${samp}_R${rep}.dupmark.bam && \
+            rm ${out_dir}/${samp}_R${rep}.dupmark.bam
 	samtools index ${out_dir}/${samp}_R${rep}.dupmark.sorted.bam
     fi
   done
