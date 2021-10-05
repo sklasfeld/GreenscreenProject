@@ -199,6 +199,17 @@ RUN $DEST/picard/gradlew shadowJar
 
 ENV PATH=${PATH}:/usr/src/picard/build/libs
 
+# install biostar145820 (for shuffling bam files)
+WORKDIR $DEST
+
+RUN git clone "https://github.com/lindenb/jvarkit.git"
+
+WORKDIR $DEST/jvarkit
+
+RUN $DEST/jvarkit/gradlew biostar145820
+
+ENV PATH=${PATH}:/usr/src/jvarkit/dist
+
 # reset working directory
 
 WORKDIR /
