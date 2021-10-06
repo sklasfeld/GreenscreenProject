@@ -3,6 +3,7 @@
 in_dir="mapped/chip"
 out_dir="mapped/chip/downsample"
 JVARKIT_PATH="/usr/src/jvarkit"
+seed=42
 mkdir -p ${out_dir}
 
 # function to find the minimum
@@ -60,7 +61,7 @@ for samp in "${pool_two[@]}"; do
     else
         # downsample these replicates
         java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
-            -n ${min_val} \
+            --seed ${seed} -n ${min_val} \
             -o ${out_dir}/${samp}_R${rep}.dupmark.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
 	samtools sort \
@@ -97,7 +98,7 @@ for samp in "${pool_three[@]}"; do
     else
         # downsample these replicates
         java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
-            -n ${min_val} \
+            --seed ${seed} -n ${min_val} \
             -o ${out_dir}/${samp}_R${rep}.dupmark.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
 	samtools sort \
@@ -132,7 +133,7 @@ for samp in "${pool_four[@]}"; do
     else
         # downsample these replicates
         java -jar ${JVARKIT_PATH}/dist/biostar145820.jar \
-            -n ${min_val} \
+            --seed ${seed} -n ${min_val} \
             -o ${out_dir}/${samp}_R${rep}.dupmark.bam \
             ${in_dir}/${samp}_R${rep}.dupmark.sorted.bam
 	samtools sort \
