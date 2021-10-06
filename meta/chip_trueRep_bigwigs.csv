@@ -1,10 +1,10 @@
 sample_name,mapping_file
 FD_W_2020_R1,data/bigwigs/chip/individual_replicates/FD_W_2020_R1.bw
 FD_W_2020_R2,data/bigwigs/chip/individual_replicates/FD_W_2020_R2.bw
-TFL1_A_W_2020_R1,data/bigwigs/chip/individual_replicates/TFL1_A_W_2020_R1.bw
-TFL1_A_W_2020_R2,data/bigwigs/chip/individual_replicates/TFL1_A_W_2020_R2.bw
-TFL1_B_W_2020_R1,data/bigwigs/chip/individual_replicates/TFL1_B_W_2020_R1.bw
-TFL1_B_W_2020_R2,data/bigwigs/chip/individual_replicates/TFL1_B_W_2020_R2.bw
+TFL1_W_2020_R1,data/bigwigs/chip/individual_replicates/TFL1_W_2020_R1.bw
+TFL1_W_2020_R2,data/bigwigs/chip/individual_replicates/TFL1_W_2020_R2.bw
+TFL1_W_2020_R3,data/bigwigs/chip/individual_replicates/TFL1_W_2020_R3.bw
+TFL1_W_2020_R4,data/bigwigs/chip/individual_replicates/TFL1_W_2020_R4.bw
 TFL1_fd_W_2020_R1,data/bigwigs/chip/individual_replicates/TFL1_fd_W_2020_R1.bw
 TFL1_fd_W_2020_R2,data/bigwigs/chip/individual_replicates/TFL1_fd_W_2020_R2.bw
 LFY_W_2021_R1,data/bigwigs/chip/individual_replicates/LFY_W_2021_R1.bw
