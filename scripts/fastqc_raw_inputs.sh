@@ -9,5 +9,5 @@ input_list=("A" "B" "C" "D" "E"
         "R" "S" "T")
 
 for x in "${input_list[@]}"; do
-    fastqc -o data/FASTQC/raw fastq/raw/input${x}.fastq
+    fastqc -o data/FASTQC/raw fastq/raw/input${x}.fastq.gz
 done

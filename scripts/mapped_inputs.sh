@@ -16,7 +16,7 @@ for x in "${input_list[@]}"; do
     bowtie2  --phred33 -q \
 	-x meta/ArabidopsisGenome/bowtie2_genome_dir/TAIR10 \
         -S mapped/input/input${x}.sam \
-        fastq/trimmed/input${x}.trimmed.fastq
+        fastq/trimmed/input${x}.trimmed.fastq.gz
     # sort the reads
     samtools sort -o mapped/input/input${x}.bam \
         mapped/input/input${x}.sam
