@@ -267,6 +267,7 @@ See supplemental methods for more detailed information.
 		ii. Of peaks not annotated in the previous step (orphan peaks), annotate to genes within 10kb that are differentially expressed in the presence of LFY (round2 annotation)
 	
 	c. Output Location: data/annotations/LFY_Jin_2021/lfy_summits_ann.tsv
+	
 ## Compare ChIP-Seq samples from different publications
 
 1. `scripts/merge_chip_peaks.sh`
@@ -281,10 +282,30 @@ See supplemental methods for more detailed information.
 	generate a signal matrix where each row represents a specific
 	region and each column represents a sequencing experiment
 
+	b. Example command: 
+
+
+``` {.bash frame="lines" breaklines=""}
+python3 scripts/coverage_bed_matrix.py \
+    meta/chip_trueRep_bigwigs.csv \
+    data/macs2_out/chipPeaks/gsMask_qval10/ChIPseq_Peaks.merged.bed \
+    -o data/plotCorrelation \
+    -m coverage_matrix_trueRep_peaks_merged.csv
+```
+
 3. `scripts/readCorrelationPlot.py`
 
-	a. Purpose: Given a signal matrix where each row represents a specific
-        region and each column represents a sequencing experiment, calculate
-	a correlation coefficient between samples and display these values in 
-	a heatmap sorted using hierarchical clustering. Optional: calculate 
+	a. Purpose: Given a signal matrix where each row represents a specific region and each column represents a sequencing experiment, calculate
+	a correlation coefficient between samples and display these values in a heatmap sorted using hierarchical clustering. Optional: calculate 
 	rand-index values given expected clusters
+
+	b. Example command:
+
+``` {.bash frame="lines" breaklines=""}
+python3 scripts/readCorrelationPlot.py \
+    data/plotCorrelation/coverage_matrix_trueRep_peaks_merged.csv \
+    data/plotCorrelation/trueRep_peaks_merged_heatmap.png \
+    -lm ward --plot_numbers -k 2 -ri \
+    -sl meta/chip_trueReps_colorshapeLabels.csv \
+    -cf meta/chip_trueReps_expectedCluster.csv
+```
