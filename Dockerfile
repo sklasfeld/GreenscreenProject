@@ -13,7 +13,7 @@ RUN apt-get update --fix-missing && \
     libblas-dev libcurl3-dev libcurl4 \
     liblapack-dev liblzma5 liblzma-dev libncurses5-dev \
     libopenblas-dev libpangocairo-1.0-0 libpcre3 libpng16-16 \
-    libssl-dev libssl-doc libtiff5 \
+    libssl-dev libssl-doc libtiff5 librsvg2-dev \
     libxml2-dev locales make tar unzip wget curl zip \
     zlib1g zlib1g-dev && \
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \

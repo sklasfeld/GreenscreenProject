@@ -109,7 +109,7 @@ notInstalledBiocPackages <- which( !listOfBiocPackages %in% rownames(installed.p
 ## check there's still something left to install
 if( length(notInstalledBiocPackages) ) {
     for (biocPackage in listOfBiocPackages[ notInstalledBiocPackages ]) {
-        BiocManager::install(biocPackage)
+        BiocManager::install(biocPackage, force=TRUE)
     }
 }
 
