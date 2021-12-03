@@ -1,11 +1,11 @@
 ---
+
 author:
 - Samantha Klasfeld
 - Doris Wagner
 date: July 28, 2021
-title: Supplementary Material for \"Improving Resolution of Protein
-  Binding Sites by filtering conserved ultra-high signals in
-  Arabidopsis\"
+title: Improving Resolution of Protein Binding Sites by filtering conserved ultra-high signals in *Arabidopsis*
+
 ---
 
 # Methods
@@ -99,11 +99,10 @@ Build the docker image using the command:
 The last string of letters and numbers in the output is the image ID.
 For example, the end of the output should look something like this:
 
-::: {.minted}
-Step 27/27 : WORKDIR /home ---\> Running in e60e511455d1 Removing
-intermediate container e60e511455d1 ---\> ef5749b6dfa5 Successfully
-built ef5749b6dfa5
-:::
+
+> Step 27/27 : WORKDIR /home ---\> Running in e60e511455d1 Removing
+> intermediate container e60e511455d1 ---\> ef5749b6dfa5 Successfully
+> built ef5749b6dfa5
 
 Above the image ID is 'ef5749b6dfa5'. To confirm this image ID, use the
 following command: . To run and generate an interactive container using
@@ -578,92 +577,104 @@ $ python3 scripts/readCorrelationPlot.py \
     -cf meta/chip_trueReps_expectedCluster.csv
 ```
 
-::: {.thebibliography}
-9 Andrews S. (2010). FastQC: a quality control tool for high throughput
+### Bibliography
+* Andrews S. (2010). FastQC: a quality control tool for high throughput
 sequence data. Available online at:
-http://www.bioinformatics.babraham.ac.uk/projects/fastqc Auguie B.
-(2017). gridExtra: Miscellaneous Functions for \"Grid\" Graphics. R
+http://www.bioinformatics.babraham.ac.uk/projects/fastqc 
+* Auguie B. (2017). gridExtra: Miscellaneous Functions for \"Grid\" Graphics. R
 package version 2.3. https://CRAN.R-project.org/package=gridExtra
-Bolger, A. M., Lohse, M., and Usadel, B. (2014). Trimmomatic: a flexible
+* Bolger, A. M., Lohse, M., and Usadel, B. (2014). Trimmomatic: a flexible
 trimmer for Illumina sequence data. Bioinformatics, 30(15), 2114-2120.
-Carroll, T. S., Liang, Z., Salama, R., Stark, R., and de Santiago, I.
+* Carroll, T. S., Liang, Z., Salama, R., Stark, R., and de Santiago, I.
 (2014). Impact of artifact removal on ChIP quality metrics in ChIP-seq
-and ChIP-exo data. Frontiers in genetics, 5, 75. Chen, D., & Kaufmann,
+and ChIP-exo data. Frontiers in genetics, 5, 75. 
+* Chen, D., & Kaufmann,
 K. (2017). Integration of Genome-Wide TF Binding and Gene Expression
 Data to Characterize Gene Regulatory Networks in Plant Development. In
 Plant Gene Regulatory Networks (pp. 239-269). Humana Press, New York,
-NY. Cheng, C. Y., Krishnakumar, V., Chan, A. P., Thibaud‐Nissen, F.,
+NY. 
+* Cheng, C. Y., Krishnakumar, V., Chan, A. P., Thibaud‐Nissen, F.,
 Schobel, S., and Town, C. D. (2017). Araport11: a complete reannotation
 of the Arabidopsis thaliana reference genome. The Plant Journal, 89(4),
-789-804. Davis, Maintainer Trevor L. \"Package 'argparse'.\" (2015).
-Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. Computing
-in science & engineering, 9(3), 90. Jones, E., Oliphant, T., and
-Peterson, P. (2001). SciPy: Open source scientific tools for Python.
-Kent, J. (2018). KentUtils (Version 419) \[Source Code\].
-http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/.(2021) Kharchenko
-PK, Tolstorukov MY, Park PJ, Design and analysis of ChIP-seq experiments
+789-804. 
+* Davis, Maintainer Trevor L. \"Package 'argparse'.\" (2015).
+* Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. Computing
+in science & engineering, 9(3), 90.
+* Jones, E., Oliphant, T., and Peterson, P. (2001). SciPy: Open source scientific tools for Python.
+* Kent, J. (2018). KentUtils (Version 419) \[Source Code\].
+http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/.(2021) 
+* Kharchenko PK, Tolstorukov MY, Park PJ, Design and analysis of ChIP-seq experiments
 for DNA-binding proteins Nat Biotechnol. 2008 Dec;26(12):1351-9
-Langmead, B., and Salzberg, S. L. (2012). Fast gapped-read alignment
-with Bowtie 2. Nature methods, 9(4), 357. Landt, S.G., Marinov, G.K.,
-Kundaje, A., Kheradpour, P., Pauli, F., Batzoglou, S., Bernstein, B.E.,
+* Langmead, B., and Salzberg, S. L. (2012). Fast gapped-read alignment
+with Bowtie 2. Nature methods, 9(4), 357. 
+* Landt, S.G., Marinov, G.K., Kundaje, A., Kheradpour, P., Pauli, F., Batzoglou, S., Bernstein, B.E.,
 Bickel, P., Brown, J.B., Cayting, P. and Chen, Y. (2012). ChIP-seq
 guidelines and practices of the ENCODE and modENCODE consortia. Genome
-research, 22(9), 1813-1831. Lawrence, M., Huber, W., Pages, H., Aboyoun,
+research, 22(9), 1813-1831. 
+* Lawrence, M., Huber, W., Pages, H., Aboyoun,
 P., Carlson, M., Gentleman, R., Morgan, M.T. and Carey, V.J. (2013).
 Software for computing and annotating genomic ranges. PLoS computational
-biology, 9(8), e1003118. Lekhonkhobe, T. (2017). mwaskom/seaborn: v0.
-8.1 (September 2017). Li, H., Handsaker, B., Wysoker, A., Fennell, T.,
+biology, 9(8), e1003118. 
+* Lekhonkhobe, T. (2017). mwaskom/seaborn: v0.
+8.1 (September 2017). 
+* Li, H., Handsaker, B., Wysoker, A., Fennell, T.,
 Ruan, J., Homer, N., Marth, G., Abecasis, G. and Durbin, R. (2009). The
 sequence alignment/map format and SAMtools. Bioinformatics, 25(16),
-2078-2079. McKinney, W. (2010, June). Data structures for statistical
+2078-2079. 
+* McKinney, W. (2010, June). Data structures for statistical
 computing in python. In Proceedings of the 9th Python in Science
-Conference (Vol. 445, pp. 51-56). Merkel, D. (2014). Docker: lightweight
+Conference (Vol. 445, pp. 51-56). 
+* Merkel, D. (2014). Docker: lightweight
 linux containers for consistent development and deployment. Linux
-Journal, 2014(239), 2. Oliphant, T. E. (2006). A guide to NumPy (Vol. 1,
-p. 85). USA: Trelgol Publishing. Picard: a set of command line tools (in
+Journal, 2014(239), 2. 
+* Oliphant, T. E. (2006). A guide to NumPy (Vol. 1,
+p. 85). USA: Trelgol Publishing. 
+* Picard: a set of command line tools (in
 Java) for manipulating high-throughput sequencing (HTS) data and formats
 such as SAM/BAM/CRAM and VCF. Retrieved from:
-http://broadinstitute.github.io/picard/ Ramírez, Fidel, Devon P. Ryan,
+http://broadinstitute.github.io/picard/ 
+* Ramírez, Fidel, Devon P. Ryan,
 Björn Grüning, Vivek Bhardwaj, Fabian Kilpert, Andreas S. Richter,
 Steffen Heyne, Friederike Dündar, and Thomas Manke. deepTools2: A next
 Generation Web Server for Deep-Sequencing Data Analysis. Nucleic Acids
-Research (2016). doi:10.1093/nar/gkw257. Robinson, J. T.,
-Thorvaldsdóttir, H., Wenger, A. M., Zehir, A., and Mesirov, J. P.
+Research (2016). doi:10.1093/nar/gkw257. 
+* Robinson, J. T.,Thorvaldsdóttir, H., Wenger, A. M., Zehir, A., and Mesirov, J. P.
 (2017). Variant review with the integrative genomics viewer. Cancer
-research, 77(21), e31-e34. Robinson, J. T., Thorvaldsdóttir, H.,
-Winckler, W., Guttman, M., Lander, E. S., Getz, G., and Mesirov, J. P.
-(2011). Integrative genomics viewer. Nature biotechnology, 29(1), 24.
-Seabold, Skipper, and Josef Perktold. "Statsmodels: Econometric and
+research, 77(21), e31-e34. 
+* Seabold, Skipper, and Josef Perktold. "Statsmodels: Econometric and
 statistical modeling with python." Proceedings of the 9th Python in
-Science Conference. 2010. Shirley MD, Ma Z, Pedersen BS, Wheelan SJ.
+Science Conference. 2010. 
+* Shirley MD, Ma Z, Pedersen BS, Wheelan SJ.
 (2015) Efficient \"pythonic\" access to FASTA files using pyfaidx. PeerJ
 PrePrints 3:e1196 https://dx.doi.org/10.7287/peerj.preprints.970v1
-SignalSmooth. SciPy Cookbook; 2017 \[accessed 2019 Aug 30\].
-https://scipy-cookbook.readthedocs.io/items/SignalSmooth.html. Quinlan,
-A. R., and Hall, I. M. (2010). BEDTools: a flexible suite of utilities
+* SignalSmooth. SciPy Cookbook; 2017 \[accessed 2019 Aug 30\].
+https://scipy-cookbook.readthedocs.io/items/SignalSmooth.html.
+* Quinlan, A. R., and Hall, I. M. (2010). BEDTools: a flexible suite of utilities
 for comparing genomic features. Bioinformatics, 26(6), 841-842.
-Thorvaldsdóttir, H., Robinson, J. T., and Mesirov, J. P. (2013).
+* Thorvaldsdóttir, H., Robinson, J. T., and Mesirov, J. P. (2013).
 Integrative Genomics Viewer (IGV): high-performance genomics data
 visualization and exploration. Briefings in bioinformatics, 14(2),
-178-192. Van Der Walt, S., Colbert, S. C., and Varoquaux, G. (2011). The
+178-192. 
+* Van Der Walt, S., Colbert, S. C., and Varoquaux, G. (2011). The
 NumPy array: a structure for efficient numerical computation. Computing
 in Science & Engineering, 13(2), 22. Wang, H., Li, S., Li, Y.A., Xu, Y.,
-Wang, Y., Zhang, R., Sun, W., Chen, Q., Wang, X.J., Li, C. and Zhao, J.
+* Wang, Y., Zhang, R., Sun, W., Chen, Q., Wang, X.J., Li, C. and Zhao, J.
 (2019). MED25 connects enhancer--promoter looping and MYC2-dependent
 activation of jasmonate signalling. Nature plants, 5(6), 616-625.
-Waskom, M., Botvinnik, O., O'Kane, D., Hobson, P., Lukauskas, S.,
+* Waskom, M., Botvinnik, O., O'Kane, D., Hobson, P., Lukauskas, S.,
 Gemperline, D.C., Augspurger, T., Halchenko, Y., Cole, J.B.,
 Warmenhoven, J. and de Ruiter, J. (2017). mwaskom/seaborn: v0. 8.1
 (September 2017) Wickham, H. (2016). ggplot2: elegant graphics for data
-analysis. Springer. Wickham, H., François, R., Henry, L., and Müller, K.
+analysis. Springer. 
+* Wickham, H., François, R., Henry, L., and Müller, K.
 (2019). dplyr: A Grammar of Data Manipulation. R package version 0.8.3.
-https://CRAN.R-project.org/package=dplyr Zhang, Y., Liu, T., Meyer,
+https://CRAN.R-project.org/package=dplyr 
+* Zhang, Y., Liu, T., Meyer,
 C.A., Eeckhoute, J., Johnson, D.S., Bernstein, B.E., Nusbaum, C., Myers,
 R.M., Brown, M., Li, W., Liu, X.S.. Model-based analysis of ChIP-Seq
-(MACS). Genome biology. 2008 Nov;9(9):1-9. Zhu, L. J., Gazin, C.,
-Lawson, N. D., Pagès, H., Lin, S. M., Lapointe, D. S., and Green, M. R.
+(MACS). Genome biology. 2008 Nov;9(9):1-9. 
+* Zhu, L. J., Gazin, C.,Lawson, N. D., Pagès, H., Lin, S. M., Lapointe, D. S., and Green, M. R.
 (2010). ChIPpeakAnno: a Bioconductor package to annotate ChIP-seq and
-ChIP-chip data. BMC bioinformatics, 11(1), 237. Zhu, L. J. (2013).
-Integrative analysis of ChIP-chip and ChIP-seq dataset. In Tiling Arrays
+ChIP-chip data. BMC bioinformatics, 11(1), 237. 
+* Zhu, L. J. (2013).Integrative analysis of ChIP-chip and ChIP-seq dataset. In Tiling Arrays
 (pp. 105-124). Humana Press, Totowa, NJ.
-:::
