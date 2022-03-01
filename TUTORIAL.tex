@@ -258,7 +258,7 @@ First we need a table of the fragment size of each sample, {\fontfamily{cmtt}\se
 
 \subsection{ChIP-Seq Analysis}
 \subsubsection{Annotate LFY ChIP-Seq Peaks}
-LFY ChIP-Seq peak summits are annotated to genes in two rounds. In round one, summits are first matched to genes with which the summits are intragenic. Of the non-intragenic summits, matches are made between the nearest genes within 3kb of which summits are upstream to the gene. Round 2 involves annotating orphan peak summits, ones that were not already annotated in round 1, to the nearest LFY dependent genes within 10kb of called summits. Differential expression output from four RNA-Seq experiments are found in {\fontfamily{cmtt}\selectfont meta/lfy\_rna\_diffExp}.
+LFY ChIP-Seq peak summits are annotated to genes in two rounds. In round one, summits are first matched to genes with which the summits are intragenic. Of the non-intragenic summits, matches are made between the nearest genes within 4kb of which summits are upstream to the gene. Round 2 involves annotating orphan peak summits, ones that were not already annotated in round 1, to the nearest LFY dependent genes within 10kb of called summits. Differential expression output from four RNA-Seq experiments are found in {\fontfamily{cmtt}\selectfont meta/lfy\_rna\_diffExp}.
 
 The Araport11 GFF file contains several details about each of the feature groups in the annotated genome. The annotations for the gene feature group are expanded into a tab-delimited table format using {\fontfamily{cmtt}\selectfont scripts/gff2annTable.py}.
 
