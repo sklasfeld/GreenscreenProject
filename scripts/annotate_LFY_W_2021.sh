@@ -10,7 +10,7 @@ python3 scripts/ChIP_Annotation LFY_W_2021 \
     ${summits_dir}/LFY_W_2021_summits.bed \
     meta/ArabidopsisGenome/Araport11_GFF3_true_protein_miRNA_genes.bed \
     -n ${summits_dir}/LFY_W_2021_summits.narrowPeak \
-    -tss 3000 -tts 0 \
+    -tss 4000 -tts 0 \
     -gt meta/ArabidopsisGenome/Araport11_GFF3_genesAttributes.tsv \
     ${rna_dir}/Winter2011_RNASeq_DexVMock_seedlings_t4hr.txt \
     ${rna_dir}/Jin2020_RNASeq_DexVMock_rootCallus_t1hr_adjp0.001.txt \
