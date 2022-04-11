@@ -1,6 +1,6 @@
 #!/bin/bash
 
-greenscreen_regions="data/macs2_out/inputControls/qval10/gs_merge5000bp_call10_20inputs.txt"
+greenscreen_regions="meta/arabidopsis_greenscreen_20inputs.bed"
 
 # 1. mask reads that overlap Greenscreen
 
