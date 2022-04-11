@@ -1,75 +1,77 @@
 #!/bin/bash
 
+sra_tools_dir="/usr/src/sratoolkit.2.11.2-ubuntu64/bin"
+
 # FD_W_2020 ChIP-Seq Rep 1
-fastq-dump SRR10676619
+${sra_tools_dir}/fastq-dump SRR10676619
 # FD_W_2020 ChIP-Seq Rep 2
-fastq-dump SRR10676620
+${sra_tools_dir}/fastq-dump SRR10676620
 # TFL1_W_2020 ChIP-Seq Rep 1
-fastq-dump SRR10676621
+${sra_tools_dir}/fastq-dump SRR10676621
 # TFL1_W_2020 ChIP-Seq Rep 2
-fastq-dump SRR10676622
+${sra_tools_dir}/fastq-dump SRR10676622
 # TFL1_W_2020 ChIP-Seq Rep 3
-fastq-dump SRR10676623
+${sra_tools_dir}/fastq-dump SRR10676623
 # TFL1_W_2020 ChIP-Seq Rep 4
-fastq-dump SRR10676624
+${sra_tools_dir}/fastq-dump SRR10676624
 # TFL1_fd_W_2020 ChIP-Seq Rep 1
-fastq-dump SRR10676625
+${sra_tools_dir}/fastq-dump SRR10676625
 # TFL1_fd_W_2020 ChIP-Seq Rep 2
-fastq-dump SRR10676626
+${sra_tools_dir}/fastq-dump SRR10676626
 # FD_W_2020, TFL1_A_W_2020,
 # TFL1_B_W_2020, & TFL1_fd_W_2020
 # Input Control Rep 1
-fastq-dump SRR10676631
+${sra_tools_dir}/fastq-dump SRR10676631
 # FD_W_2020, TFL1_A_W_2020,
 # TFL1_B_W_2020, & TFL1_fd_W_2020
 # Input Control Rep 2
-fastq-dump SRR10676632
+${sra_tools_dir}/fastq-dump SRR10676632
 # FD_W_2020, TFL1_A_W_2020,
 # TFL1_B_W_2020, & TFL1_fd_W_2020
 # Input Control Rep 3
-fastq-dump SRR10676633
+${sra_tools_dir}/fastq-dump SRR10676633
 # FD_W_2020, TFL1_A_W_2020,
 # TFL1_B_W_2020, & TFL1_fd_W_2020
 # Input Control Rep 4
-fastq-dump SRR10676634
+${sra_tools_dir}/fastq-dump SRR10676634
 # FD_W_2020, TFL1_A_W_2020,
 # & TFL1_B_W_2020
 # Mock Control Rep 1
-fastq-dump SRR10676627
+${sra_tools_dir}/fastq-dump SRR10676627
 # FD_W_2020, TFL1_A_W_2020,
 # & TFL1_B_W_2020
 # Mock Control Rep 2
-fastq-dump SRR10676628
+${sra_tools_dir}/fastq-dump SRR10676628
 # TFL1_fd_W_2020 Mock Control Rep 1
-fastq-dump SRR10676629
+${sra_tools_dir}/fastq-dump SRR10676629
 # TFL1_fd_W_2020 Mock Control Rep 2
-fastq-dump SRR10676630
+${sra_tools_dir}/fastq-dump SRR10676630
 # LFY_W_2021 ChIP-Seq Rep 1
-fastq-dump SRR10614284
+${sra_tools_dir}/fastq-dump SRR10614284
 # LFY_W_2021 ChIP-Seq Rep 2
-fastq-dump SRR10614285
+${sra_tools_dir}/fastq-dump SRR10614285
 # LFY_W_2021 ChIP-Seq Rep 3
-fastq-dump SRR10614286
+${sra_tools_dir}/fastq-dump SRR10614286
 # LFY_W_2021 Input Control Rep 1
-fastq-dump SRR10614278
+${sra_tools_dir}/fastq-dump SRR10614278
 # LFY_W_2021 Input Control  Rep 2
-fastq-dump SRR10614279
+${sra_tools_dir}/fastq-dump SRR10614279
 # LFY_W_2021 Input Control  Rep 3
-fastq-dump SRR10614280
+${sra_tools_dir}/fastq-dump SRR10614280
 # LFY_W_2021 Mock Control Rep 1
-fastq-dump SRR10614281
+${sra_tools_dir}/fastq-dump SRR10614281
 # LFY_W_2021 Mock Control  Rep 2
-fastq-dump SRR10614282
+${sra_tools_dir}/fastq-dump SRR10614282
 # LFY_W_2021 Mock Control  Rep 3
-fastq-dump SRR10614283
+${sra_tools_dir}/fastq-dump SRR10614283
 # LFY_P_2016 ChIP-Seq Rep 1
-fastq-dump SRR1719111
+${sra_tools_dir}/fastq-dump SRR1719111
 # LFY_P_2016 ChIP-Seq Rep 2
-fastq-dump SRR1719112
+${sra_tools_dir}/fastq-dump SRR1719112
 # LFY_P_2016 Mock Control Rep 1
-fastq-dump SRR1719115
+${sra_tools_dir}/fastq-dump SRR1719115
 # LFY_P_2016 Mock Control Rep 2
-fastq-dump SRR1719116
+${sra_tools_dir}/fastq-dump SRR1719116
 # FD_S_2019 ChIP-Seq Rep 1
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR228/004/ERR2286784/ERR2286784.fastq.gz
 # FD_S_2019 ChIP-Seq Rep 2
@@ -95,18 +97,18 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/004/ERR2820084/ERR2820084.fastq.g
 # TFL1_S_2020 ChIP-Seq Rep 3
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR282/005/ERR2820085/ERR2820085.fastq.gz
 # LFY_P_2011 ChIP-Seq Rep 1
-fastq-dump SRR070384
+${sra_tools_dir}/fastq-dump SRR070384
 # LFY_P_2011 ChIP-Seq Rep 2
-fastq-dump SRR070385
+${sra_tools_dir}/fastq-dump SRR070385
 # LFY_P_2011 Input Control Rep 1
-fastq-dump SRR070382
+${sra_tools_dir}/fastq-dump SRR070382
 # LFY_P_2011 Input Control Rep 2
-fastq-dump SRR070383
+${sra_tools_dir}/fastq-dump SRR070383
 # FD_C_2020 ChIP-Seq Rep 1
-fastq-dump SRR9961307
+${sra_tools_dir}/fastq-dump SRR9961307
 # FD_C_2020 ChIP-Seq Rep 2
-fastq-dump SRR9961292
+${sra_tools_dir}/fastq-dump SRR9961292
 # FD_C_2020 Input Control Rep 1
-fastq-dump SRR9961306
+${sra_tools_dir}/fastq-dump SRR9961306
 # FD_C_2020 Input Control Rep 2
-fastq-dump SRR9961293
+${sra_tools_dir}/fastq-dump SRR9961293
