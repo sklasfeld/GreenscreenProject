@@ -90,7 +90,7 @@ Inside the docker container the following software should be installed:
 \end{itemize}
 
 \subsection{Docker Workspace}
-To make this tutorial easier it is recommended to install git and Docker. To manage docker as a non-root user (and avoid using \emph{sudo} for every docker command) see \url{https://docs.docker.com/engine/install/linux-postinstall/}. A Dockerfile in the github repository defines a container with the necessarily scripts, software, and environment. Before the docker file can be used, clone the github repository and enter the repository as your working directory. 
+To make this tutorial easier it is recommended to install snakemake. Clone the Greenscreen github repository and enter the repository as your working directory. 
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 # clone repository
@@ -99,48 +99,16 @@ $ git clone https://github.com/sklasfeld/GreenscreenProject.git
 $ cd GreenscreenProject
 \end{minted}
 
-Build the docker image using the command:  \bashinline{docker build .}
+Build the snakemake greenscreen environment using the command:  \bashinline{mamba env create --name gs-tutorial --file environment.yaml}
 
-The last string of letters and numbers in the output is the image ID. For example, the end of the output should look something like this:
-\begin{minted}
-Step 27/27 : WORKDIR /home
- ---> Running in e60e511455d1
-Removing intermediate container e60e511455d1
- ---> ef5749b6dfa5
-Successfully built ef5749b6dfa5
-\end{minted}
+Activate the environment using conda
+\bashinline{conda activate gs-tutorial}
 
-Above the image ID is 'ef5749b6dfa5'. To confirm this image ID, use the following command: \bashinline{docker image ls}. To run and generate an interactive container using this image type the following in to the command line (replace the text and brackets with the correct information):
-
-\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ docker run --name [CONTAINER_NAME] -i -t [IMAGE_ID] bash
-\end{minted}
-
-In the example above [IMAGE\_ID] is  e60e511455d1. [CONTAINER\_NAME] can be set to whatever name the user wants to give the new docker container.
-
-The interactive environment will open to working directory `/home/`. Note that all commands specified are from within this working directory in the container unless specified otherwise. Files generated within the local or Docker container can always be transferred back and forth by opening a new terminal and running the \bashinline{docker cp} command. The format to transfer a file from the container is:
-
-\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ docker cp [CONTAINER_NAME]:[PATH/IN/CONTAINER] [PATH/IN/LOCAL/COMPUTER]
-\end{minted}
-
-The format to transfer a file into the container is the opposite:
-
-\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ docker cp [PATH/IN/LOCAL/COMPUTER] [CONTAINER_NAME]:[PATH/IN/CONTAINER] 
-\end{minted}
-
-If the docker container is exited (ie. your computer shuts down), one can always restart and reattach the interactive container with the following commads:
-
-\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ docker container start [CONTAINER_NAME]
-$ docker attach [CONTAINER_NAME] 
-\end{minted}
 
 \subsection{Green screen generation}
 \subsubsection{Mapping the input samples}
 
-The raw sequences of the twenty inputs in Table S1 are retrieved using NCBI SRA Tools ({\fontfamily{cmtt}\selectfont scripts/import\_raw\_fasta\_inputs.sh}). To organize these fastq files, the files are compressed and moved into the `fastq/raw` directory and renamed based on the sample ID given to then in Table S1 ({\fontfamily{cmtt}\selectfont scripts/organize\_raw\_fasta\_input.sh}). Note that InputJ contains three run files; these reads are concatenated and the individual run files are deleted.
+The raw sequences of the twenty inputs in Table S1 are retrieved using NCBI SRA Tools ({\fontfamily{cmtt}\selectfont scripts/import\_raw\_fasta\_inputs.sh}). To organize these fastq files, the files are compressed and moved into the `01\_raw` directory and renamed based on the sample ID given to then in Table S1 ({\fontfamily{cmtt}\selectfont scripts/organize\_raw\_fasta\_input.sh}). Note that InputJ contains three run files; these reads are concatenated and the individual run files are deleted.
 
 Usually adapters are already trimmed before reading in the sequences. Adapters and overlap sequence quality are checked using FASTQC ({\fontfamily{cmtt}\selectfont scripts/fastqc\_raw\_inputs.sh}). The FASTQC outputs in Inputs A,J,K,M,O,R,S showed TruSeq3 adapters remaining. Fortunately, Trimmomatic was granted permission to distribute Illumina adapter and other technical sequences that were copyrighted by Illumina. Therefore, trimmomatic provides adapter sequences called TruSeq2 (adapters normally used in GAII machines) and TruSeq3 (adapters normally used in HiSeq and MiSeq machines) adapters for both single-end and paired-end mode. An adapter directory is created in the working directory, and the TruSeq3 adapters by Trimmomatic are copied into the adapter directory.
 
@@ -229,7 +197,7 @@ $ bash scripts/generate_20input_greenscreenBed.sh 10 5000 10
 
 \subsection{Calling ChIP-Seq peaks}
 \subsubsection{Mapping the input samples}
-The raw sequences of the ChIP-Seq samples and the respective MACS2 controls are retrieved using wget and NCBI SRA Tools ({\fontfamily{cmtt}\selectfont scripts/import\_raw\_fasta\_publishedChIPsAndControls.sh}). To compress and organize the files within the working space, fastq files are compressed, if not already, moved into the `fastq/raw` directory, and renamed using the format: "[ChIP Factor]\_[mutation if applicable]\_[lab]\_[publication Year]" ({\fontfamily{cmtt}\selectfont organize\_raw\_fasta\_publishedChIPsAndControls.sh}). For example, LFY ChIP from Jin /emph{et al} 2021 which originated from the Wagner lab is labelled "LFY\_W\_2021". For the next steps the code uses a text file containing all the sample ID names, {\fontfamily{cmtt}\selectfont meta/chip\_controls\_sampleIDs.list}. Before trimming the reads, adapters and overlap sequence quality are checked using FASTQC ({\fontfamily{cmtt}\selectfont fastqc\_raw\_publishedChIPsAndControls.sh}).
+The raw sequences of the ChIP-Seq samples \cite{Zhu2020,Jin2021,Collani2019,Moyroud2011,Romera2020,Sayou2016} and the respective MACS2 controls are retrieved using wget and NCBI SRA Tools ({\fontfamily{cmtt}\selectfont scripts/import\_raw\_fasta\_publishedChIPsAndControls.sh}). To compress and organize the files within the working space, fastq files are compressed, if not already, moved into the `fastq/raw` directory, and renamed using the format: "[ChIP Factor]\_[mutation if applicable]\_[lab]\_[publication Year]" ({\fontfamily{cmtt}\selectfont organize\_raw\_fasta\_publishedChIPsAndControls.sh}). For example, LFY ChIP from Jin \emph{et al} 2021 which originated from the Wagner lab is labelled "LFY\_W\_2021". For the next steps the code uses a text file containing all the sample ID names, {\fontfamily{cmtt}\selectfont meta/chip\_controls\_sampleIDs.list}. Before trimming the reads, adapters and overlap sequence quality are checked using FASTQC ({\fontfamily{cmtt}\selectfont fastqc\_raw\_publishedChIPsAndControls.sh}).
 
 Each of the samples were sequenced using HiSeq machines, therefore Trimmomatic is applied to each sample given the same TruSeq3 adapters that were used previously for the input samples to generate the green screen ({\fontfamily{cmtt}\selectfont scripts/trimmomatic\_publishedChIPsAndControls.sh}). Low quality or N bases from the read ends are trimmed, and reads less than 36bp long are removed. FASTQC is then applied to quanitify the quality of the trimmed reads.
 
@@ -349,10 +317,16 @@ Carroll, T. S., Liang, Z., Salama, R., Stark, R., and de Santiago, I. (2014). Im
 Chen, D., \& Kaufmann, K. (2017). Integration of Genome-Wide TF Binding and Gene Expression Data to Characterize Gene Regulatory Networks in Plant Development. In Plant Gene Regulatory Networks (pp. 239-269). Humana Press, New York, NY.
 \bibitem{Araport11}
 Cheng, C. Y., Krishnakumar, V., Chan, A. P., Thibaud‐Nissen, F., Schobel, S., and Town, C. D. (2017). Araport11: a complete reannotation of the Arabidopsis thaliana reference genome. The Plant Journal, 89(4), 789-804.
+\bibitem{Collani2019}
+Collani, S., Neumann, M., Yant, L., & Schmid, M. (2019). FT modulates genome-wide DNA-binding of the bZIP transcription factor FD. Plant physiology, 180(1), 367-380.
 \bibitem{argparseR}
 Davis, Maintainer Trevor L. "Package ‘argparse’." (2015).
+\bibitem{Goretti2020}
+Goretti, D., Silvestre, M., Collani, S., Langenecker, T., Méndez, C., Madueno, F., & Schmid, M. (2020). TERMINAL FLOWER1 Functions as a Mobile Transcriptional Cofactor in the Shoot Apical Meristem. Plant Physiology, 182(4), 2081-2095.
 \bibitem{matplotlib}
 Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. Computing in science \& engineering, 9(3), 90.
+\bibitem{Jin2021}
+Jin, R., Klasfeld, S., Zhu, Y., Garcia, M.F., Xiao, J., Han, S.K., Konkol, A. and Wagner, D. (2021). LEAFY is a pioneer transcription factor and licenses cell reprogramming to floral fate. Nature Communications, 12(1), pp.1-14.
 \bibitem{scipy}
 Jones, E., Oliphant, T., and Peterson, P. (2001). SciPy: Open source scientific tools for Python.
 \bibitem{kentUtils}
@@ -373,6 +347,8 @@ Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., Marth, G.,
 McKinney, W. (2010, June). Data structures for statistical computing in python. In Proceedings of the 9th Python in Science Conference (Vol. 445, pp. 51-56).
 \bibitem{Docker}
 Merkel, D. (2014). Docker: lightweight linux containers for consistent development and deployment. Linux Journal, 2014(239), 2.
+\bibitem{Moyroud2011}
+Moyroud, E., Minguet, E.G., Ott, F., Yant, L., Posé, D., Monniaux, M., Blanchet, S., Bastien, O., Thévenon, E., Weigel, D. and Schmid, M., 2011. Prediction of regulatory interactions from genome sequences using a biophysical model for the Arabidopsis LEAFY transcription factor. The Plant Cell, 23(4), pp.1293-1306.
 \bibitem{numpy1}
 Oliphant, T. E. (2006). A guide to NumPy (Vol. 1, p. 85). USA: Trelgol Publishing.
 \bibitem{Picard}
@@ -383,6 +359,10 @@ Ramírez, Fidel, Devon P. Ryan, Björn Grüning, Vivek Bhardwaj, Fabian Kilpert,
 Robinson, J. T., Thorvaldsdóttir, H., Wenger, A. M., Zehir, A., and Mesirov, J. P. (2017). Variant review with the integrative genomics viewer. Cancer research, 77(21), e31-e34.
 \bibitem{IGV_1}
 Robinson, J. T., Thorvaldsdóttir, H., Winckler, W., Guttman, M., Lander, E. S., Getz, G., and Mesirov, J. P. (2011). Integrative genomics viewer. Nature biotechnology, 29(1), 24.
+\bibitem{Romera2020}
+Romera-Branchat, M., Severing, E., Pocard, C., Ohr, H., Vincent, C., Née, G., Martinez-Gallegos, R., Jang, S., Lalaguna, F.A., Madrigal, P. and Coupland, G., 2020. Functional divergence of the Arabidopsis florigen-interacting bZIP transcription factors FD and FDP. Cell reports, 31(9), p.107717.
+\bibitem{Sayou2016}
+Sayou, C., Nanao, M.H., Jamin, M., Posé, D., Thévenon, E., Grégoire, L., Tichtinsky, G., Denay, G., Ott, F., Llobet, M.P. and Schmid, M. (2016). A SAM oligomerization domain shapes the genomic binding landscape of the LEAFY transcription factor. Nature communications, 7(1), 1-12.
 \bibitem{statsmodels}
 Seabold, Skipper, and Josef Perktold. “Statsmodels: Econometric and statistical modeling with python.” Proceedings of the 9th Python in Science Conference. 2010.
 \bibitem{faidx}
@@ -406,13 +386,25 @@ Waskom, M., Botvinnik, O., O’Kane, D., Hobson, P., Lukauskas, S., Gemperline, 
 Wickham, H. (2016). ggplot2: elegant graphics for data analysis. Springer.
 \bibitem{dplyr}
 Wickham, H., François, R., Henry, L., and Müller, K. (2019). dplyr: A Grammar of Data Manipulation. R package version 0.8.3. https://CRAN.R-project.org/package=dplyr
+\bibitem{Winter2011}
+Winter, C. M., Austin, R. S., Blanvillain-Baufume, S., Reback, M. A., Monniaux, M., Wu, M. F., Sang Y., Yamaguchi, A., Yamaguchi, N., Parker, J.E., Parcy. F., Jensen. S.T., Li, H., & Wagner, D. (2011). LEAFY target genes reveal floral regulatory logic, cis motifs, and a link to biotic stimulus response. Developmental cell, 20(4), 430-443.
 \bibitem{macs}
 Zhang, Y., Liu, T., Meyer, C.A., Eeckhoute, J., Johnson, D.S., Bernstein, B.E., Nusbaum, C., Myers, R.M., Brown, M., Li, W., Liu, X.S.. Model-based analysis of ChIP-Seq (MACS). Genome biology. 2008 Nov;9(9):1-9.
 \bibitem{ChIPpeakAnno1}
 Zhu, L. J., Gazin, C., Lawson, N. D., Pagès, H., Lin, S. M., Lapointe, D. S., and Green, M. R. (2010). ChIPpeakAnno: a Bioconductor package to annotate ChIP-seq and ChIP-chip data. BMC bioinformatics, 11(1), 237.
 \bibitem{ChIPpeakAnno2}
 Zhu, L. J. (2013). Integrative analysis of ChIP-chip and ChIP-seq dataset. In Tiling Arrays (pp. 105-124). Humana Press, Totowa, NJ.
+\bibitem{Zhu2020} Zhu, Y., Klasfeld, S., Jeong, C. W., Jin, R., Goto, K., Yamaguchi, N., & Wagner, D. (2020). TERMINAL FLOWER 1-FD complex target genes and competition with FLOWERING LOCUS T. Nature communications, 11(1), 1-12.
 \end{thebibliography}
 
 \end{sloppypar}
 \end{document}
+
+
+ . 
+ . Jin, R., Klasfeld, S., Zhu, Y., Garcia, M.F., Xiao, J., Han, S.K., Konkol, A. and Wagner, D. (2021). LEAFY is a pioneer transcription factor and licenses cell reprogramming to floral fate. Nature Communications, 12(1), pp.1-14.
+ . Moyroud, E., Minguet, E.G., Ott, F., Yant, L., Posé, D., Monniaux, M., Blanchet, S., Bastien, O., Thévenon, E., Weigel, D. and Schmid, M., 2011. Prediction of regulatory interactions from genome sequences using a biophysical model for the Arabidopsis LEAFY transcription factor. The Plant Cell, 23(4), pp.1293-1306.
+ . Romera-Branchat, M., Severing, E., Pocard, C., Ohr, H., Vincent, C., Née, G., Martinez-Gallegos, R., Jang, S., Lalaguna, F.A., Madrigal, P. and Coupland, G., 2020. Functional divergence of the Arabidopsis florigen-interacting bZIP transcription factors FD and FDP. Cell reports, 31(9), p.107717.
+ . Sayou, C., Nanao, M.H., Jamin, M., Posé, D., Thévenon, E., Grégoire, L., Tichtinsky, G., Denay, G., Ott, F., Llobet, M.P. and Schmid, M. (2016). A SAM oligomerization domain shapes the genomic binding landscape of the LEAFY transcription factor. Nature communications, 7(1), 1-12.
+ . Goretti, D., Silvestre, M., Collani, S., Langenecker, T., Méndez, C., Madueno, F., & Schmid, M. (2020). TERMINAL FLOWER1 Functions as a Mobile Transcriptional Cofactor in the Shoot Apical Meristem. Plant Physiology, 182(4), 2081-2095.
+ . Winter, C. M., Austin, R. S., Blanvillain-Baufume, S., Reback, M. A., Monniaux, M., Wu, M. F., Sang Y., Yamaguchi, A., Yamaguchi, N., Parker, J.E., Parcy. F., Jensen. S.T., Li, H., & Wagner, D. (2011). LEAFY target genes reveal floral regulatory logic, cis motifs, and a link to biotic stimulus response. Developmental cell, 20(4), 430-443.
