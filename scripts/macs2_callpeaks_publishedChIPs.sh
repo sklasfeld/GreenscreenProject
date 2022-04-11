@@ -4,7 +4,7 @@ raw_bam_dir="mapped/chip"
 downsamp_bam_dir="${raw_bam_dir}/downsample"
 bam_suffix="dupmark.sorted.bam"
 macs2_out="data/macs2_out/chipPeaks"
-gs_regions="data/macs2_out/inputControls/qval10/gs_merge5000bp_call10_20inputs.txt"
+gs_regions="meta/arabidopsis_greenscreen_20inputs.bed"
 # average basepair q-value threshold (log10)
 q=10
 
