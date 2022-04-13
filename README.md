@@ -1,7 +1,7 @@
 # I. Introduction
 
 This repository contains scripts and files used to analyze ChIP-Seq experiments
-for Klasfeld et al 2022. A tutorial to run the pipeline is found in TUTORIAL.pdf
+for Klasfeld et al 2022. **A tutorial to run the pipeline is found in TUTORIAL.pdf**
 
 # II. Contents of This Repository
 
