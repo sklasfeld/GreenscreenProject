@@ -5,7 +5,10 @@ for Klasfeld et al 2022. **A tutorial to run the pipeline is found in TUTORIAL.p
 
 # II. Contents of This Repository
 
-* `data` directory: results from analysis
+* `data` directory includes
+   * *Arabidopsis* blacklist
+   * *Arabidopsis* greenscreen
+   * other analysis results
 * `notebook` directory: jupyter notebooks used to generate some of the plots for the paper
 * `meta` directory: text files used for providing context for running specific scripts 
 	* See TUTORIAL.pdf and meta/README.md for more information 
