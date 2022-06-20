@@ -7,7 +7,7 @@ x="A"
 raw_f="SRR8180351.fastq"
 gzip_f="${outdir}/input${x}.fastq.gz"
 if [[ -f "$raw_f" && ! -f "$gzip_f" ]]; then
-	gzip -c SRR8180351.fastq > ${gzip_f} \
+	gzip -c ${raw_f} > ${gzip_f} \
 		&& rm ${raw_f}
 elif [[ ! -f "$raw_f" && ! -f "$gzip_f" ]]; then
 	echo "ERROR: Cannot Find File: ${raw_f}"
