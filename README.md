@@ -29,4 +29,5 @@ docker pull sklasfeld/greenscreen:latest
 * `scripts` directory: custom scripts used for greenscreen and ChIP-Seq analysis 
 	* See TUTORIAL.pdf and scripts/README.md for more information 
 	about specific files
+* `demo` directory: input files to run demo script `scripts/generate_gsRegions_demo.py`
 
