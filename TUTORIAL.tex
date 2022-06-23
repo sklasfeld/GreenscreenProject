@@ -142,7 +142,7 @@ cd GreenscreenProject/
 To run the entire greenscreen generation pipeline in one command use the demo script:
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ bash scripts/generate_gsRegions_demo.sh
+$ python3 scripts/generate_gsRegions_demo.py
 \end{minted}
 
 The demo directory contains three demo input fastq files which are run through the pipeline to generate a greenscreen for chromosome two in Arabidopsis. For computational efficiency these fastq files have very low sequencing depth. The demo should produce greenscreen regions in a file located at `demo/data/macs2\_out/inputControls/qval10/merge500bp\_20inputs.txt`
