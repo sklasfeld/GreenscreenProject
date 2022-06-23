@@ -95,7 +95,7 @@ To make this tutorial easier it is recommended to install git \cite{git} (\url{h
 To manage docker images as a non-root user (and avoid using \emph{sudo} for every docker command) see \url{https://docs.docker.com/engine/install/linux-postinstall/}. An image of the greenscreen environment called `sklasfeld/greenscreen` is on dockerhub. To pull the image use the following command:
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-docker pull sklasfeld/greenscreen
+docker pull sklasfeld/greenscreen:latest
 \end{minted}
 
 To run and generate the interactive environment (also called a docker "container") using this image type the following into the command line (replace the text in brackets with the correct information):
@@ -145,7 +145,7 @@ To run the entire greenscreen generation pipeline in one command use the demo sc
 $ bash scripts/generate_gsRegions_demo.sh
 \end{minted}
 
-The demo directory contains three demo input fastq files which are run through the pipeline to generate a greenscreen for chromosome two in Arabidopsis. For computational efficiency these fastq files have very low sequencing depth.
+The demo directory contains three demo input fastq files which are run through the pipeline to generate a greenscreen for chromosome two in Arabidopsis. For computational efficiency these fastq files have very low sequencing depth. The demo should produce greenscreen regions in a file located at `demo/data/macs2\_out/inputControls/qval10/merge500bp\_20inputs.txt`
 
 \subsubsection{Import the raw input samples' reads}
 
@@ -455,7 +455,7 @@ Bolger, A. M., Lohse, M., and Usadel, B. (2014). Trimmomatic: a flexible trimmer
 \bibitem{blacklist_masking}
 Carroll, T. S., Liang, Z., Salama, R., Stark, R., and de Santiago, I. (2014). Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data. Frontiers in genetics, 5, 75.
 \bibitem{git}
-Chacon, S., & Straub, B. (2014). Pro git. Apress.
+Chacon, S., \& Straub, B. (2014). Pro git. Apress.
 \bibitem{Chen2017}
 Chen, D., \& Kaufmann, K. (2017). Integration of Genome-Wide TF Binding and Gene Expression Data to Characterize Gene Regulatory Networks in Plant Development. In Plant Gene Regulatory Networks (pp. 239-269). Humana Press, New York, NY.
 \bibitem{Araport11}
