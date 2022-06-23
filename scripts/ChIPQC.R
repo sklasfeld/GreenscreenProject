@@ -76,10 +76,10 @@ parser$add_argument('-s','--chr_sizes', help=paste('file containing a',
     'annotation.'))
 parser$add_argument('-k','--color', help = paste("column to color the samples by"))
 parser$add_argument("-i", "--indivReports", dest="indivReports",
-                     action="store_true", default=F,
+                     action="store_true", default=FALSE,
                     help="Print a seperate report for each row in exp_design sheet")
 parser$add_argument("-r", "--sampleReports", dest="sampleReports",
-                    action="store_true", default=F,
+                    action="store_true", default=FALSE,
                     help=paste('Print a seperate report for each facet value (set by',
                         'the `facet` parameter) in the exp_design sheet.',
                         'This cannot be set with `indivReports` parameter.'))
@@ -101,9 +101,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE)){
 
 
 # get Bioconductor libraries installed if not available
-listOfBiocPackages=c('ShortRead', 'edgeR', 'DESeq2', 'GOstats',
-    'amap', 'systemPipeR', 'ChIPQC',
-    'GenomicFeatures','GenomicRanges')
+listOfBiocPackages=c('ChIPQC','GenomicFeatures','GenomicRanges')
 
 notInstalledBiocPackages <- which( !listOfBiocPackages %in% rownames(installed.packages()) )
 ## check there's still something left to install
@@ -124,7 +122,7 @@ print("> All packages are loaded.")
 print("> Preparing objects for ChIPQC")
 
 # check that both params are not set
-if ((args$indivReports == TRUE) && (args$sampleReports == TRUE)){
+if ((args$indivReports) && (args$sampleReports)){
     stop('params `indivReports` and `sampleReports` cannot both be set')
 } else{
     # check if need custom gff_ann file
