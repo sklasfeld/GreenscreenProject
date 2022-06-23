@@ -45,11 +45,9 @@ def cmd(foo, verbose=False, output_f=""):
 			run_cmd=False
 	if run_cmd:
 		if verbose:
-			sys.stdout.write("%s\n" % foo)
+			sys.stdout.write("> CMD: %s\n" % foo)
 			sys.stdout.flush()
 		os.system(foo)
-
-
 
 # Hard-Coded Variables
 
@@ -68,7 +66,7 @@ normalizeby = 10000000 # scaling factor
 
 # * greenscreen settings
 qval=10
-merge_distance=500
+merge_distance=5000
 distinct_ninputs=2
 
 # * other settings
@@ -96,7 +94,7 @@ mapped_dir = ("%s/mapped/input" % data_dir)
 macs_dir = ("%s/macs2_out/inputControls" % data_dir)
 qval_dir = ("%s/qval%i" % (macs_dir, qval))
 concat_file = ("%s/concat_input_peaks.broadPeak" % qval_dir)
-merge_file = ("%s/merge%ibp_20inputs.txt" % (qval_dir,merge_distance))
+merge_file = ("%s/merge%ibp_demoInputs.txt" % (qval_dir,merge_distance))
 final_greenscreen = ("%s/gs_merge%ibp_call%i_demoInputs.broadPeak" 
 	% (qval_dir, merge_distance,distinct_ninputs))
 
@@ -159,7 +157,7 @@ for samp in input_list:
 	add_dir("adapters")
 	cp_adapters_cmd = ("cp %s/adapters/TruSeq3-SE.fa adapters"
 		% (trimmomatic_install_dir))
-	cmd(cp_adapters_cmd, verbose)
+	cmd(cp_adapters_cmd, verbose, "adapters/TruSeq3-SE.fa")
 	
 	add_dir(fastq_trim_dir)
 	trim_fastq = ("%s/%s.trimmed.fq.gz" % (fastq_trim_dir,samp))
@@ -409,3 +407,5 @@ greenscreen_df = mergedRegions_df.loc[(
 	mergedRegions_df["ninputs"] >= distinct_ninputs), :].copy()
 greenscreen_df.drop(['ninputs'], axis=1, inplace=True)
 greenscreen_df.to_csv(final_greenscreen, header=False, index=False, sep="\t")
+if verbose:
+	sys.stdout.write("> Greenscreen regions path: %s\n" % final_greenscreen)
