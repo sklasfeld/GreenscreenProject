@@ -76,6 +76,26 @@ RUN apt-get clean && apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     >> /dev/null
 
+# install R libraries
+RUN R -e "install.packages('rsvg', dependencies=TRUE, repos='https://cran.r-project.org')"
+RUN R -e "install.packages('BiocManager', dependencies=TRUE, repos='http://cran.us.r-project.org')"
+
+RUN wget https://cran.r-project.org/src/contrib/Archive/locfit/locfit_1.5-9.4.tar.gz && \
+   tar -xzvf locfit_1.5-9.4.tar.gz
+RUN R -e "install.packages('locfit', repos = NULL, type='source')"
+
+
+RUN Rscript -e "BiocManager::install()"
+RUN Rscript -e "BiocManager::install('ShortRead', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('edgeR', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('DESeq2', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('GOstats', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('amap', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('systemPipeR', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('ChIPQC', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('GenomicFeatures', force=TRUE, ask=FALSE)"
+RUN Rscript -e "BiocManager::install('GenomicRanges', force=TRUE, ask=FALSE)"
+
 # import python & other useful software
 RUN apt-get update --fix-missing && \
 	apt-get install -y --no-install-recommends \
@@ -220,12 +240,6 @@ ENV PATH=${PATH}:/usr/src/jvarkit/dist
 # reset working directory
 
 WORKDIR /
-
-# copy scripts and helper meta information into container
-
-COPY scripts /home/scripts
-
-COPY meta /home/meta
 
 # report done
 
