@@ -106,7 +106,7 @@ $ docker run --name [CONTAINER_NAME] -i -t sklasfeld/greenscreen bash
 
 [CONTAINER\_NAME] can be set to whatever name the user wants to name the new docker container.
 
-The interactive environment will open to working directory `/home/`. All commands need to be run within this working directory, unless specified otherwise. Files generated within the local computer environment or the Docker container environment can be transferred back and forth by opening a new terminal and running the \bashinline{docker cp} command. The format to transfer a file from the container is:
+The interactive environment will open to working directory `/home/`. Files generated within the local computer environment or the Docker container environment can be transferred back and forth by opening a new terminal and running the \bashinline{docker cp} command. The format to transfer a file from the container is:
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 $ docker cp [CONTAINER_NAME]:[PATH/IN/CONTAINER] [PATH/IN/LOCAL/COMPUTER]
@@ -125,10 +125,31 @@ $ docker container start [CONTAINER_NAME]
 $ docker attach [CONTAINER_NAME] 
 \end{minted}
 
+To run this tutorial, clone the github repository in the docker environment.
+
+\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
+git clone https://github.com/sklasfeld/GreenscreenProject.git
+\end{minted}
+
+Set the working directory from within the repository. All commands need to be run within this working directory, unless specified otherwise.
+
+\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
+cd GreenscreenProject/
+\end{minted}
+
 \subsection{greenscreen generation}
+
+To run the entire greenscreen generation pipeline in one command use the demo script:
+
+\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
+$ bash scripts/generate_gsRegions_demo.sh
+\end{minted}
+
+The demo directory contains three demo input fastq files which are run through the pipeline to generate a greenscreen for chromosome two in Arabidopsis. For computational efficiency these fastq files have very low sequencing depth.
+
 \subsubsection{Import the raw input samples' reads}
 
-The raw sequences of the twenty inputs from Table S1 are retrieved using NCBI SRA Tools fastq-dump command ({\fontfamily{cmtt}\selectfont scripts/import\_raw\_fasta\_inputs.sh}). Run these commands in the docker container from the `/home/` directory:
+The raw sequences of the twenty inputs from Table S1 are retrieved using NCBI SRA Tools fastq-dump command ({\fontfamily{cmtt}\selectfont scripts/import\_raw\_fasta\_inputs.sh}). Run these commands in the docker container from the `/home/GreensceenProject/` directory:
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 $ bash scripts/import_raw_fasta_inputs.sh
@@ -205,7 +226,7 @@ To run the ChIPQC.R script we need the following:
 
 Make sure the chromosome names are the same between your Genome Annotation (GFF), Genome (FASTA) and Chromosome sizes files. For example, Chromosome 1 can be labeled as either "1", "chr1", "Chr1", etc.
 
-A sample sheet of the Input-seq experiments is {\fontfamily{cmtt}\selectfont meta/noMaskReads\_Inputs\_sampleSheet.csv}. Genome annotations can be found online. The Arabidopsis genome annotation {\fontfamily{cmtt}\selectfont meta/ArabidopsisGenome/Araport11\_GFF3\_genes\_transposons.201606.gff.gz} was found at: \url{https://datacommons.cyverse.org/browse/iplant/home/araport/public_data/Araport11_Release_201606/annotation}. It is transferred to the docker container using the "docker cp" command to the docker container path: /home/meta/ArabidopsisGenome. This gff file is written using unicode percent encodings. These encodings can be translated into UNIX format using the following script {\fontfamily{cmtt}\selectfont scripts/translateUniCodeFile.py}. 
+A sample sheet of the Input-seq experiments is {\fontfamily{cmtt}\selectfont meta/noMaskReads\_Inputs\_sampleSheet.csv}. Genome annotations can be found online. The Arabidopsis genome annotation {\fontfamily{cmtt}\selectfont meta/ArabidopsisGenome/Araport11\_GFF3\_genes\_transposons.201606.gff.gz} was found at: \url{https://datacommons.cyverse.org/browse/iplant/home/araport/public_data/Araport11_Release_201606/annotation}. It is transferred to the docker container using the "docker cp" command to the docker container path: /home/GreensceenProject/meta/ArabidopsisGenome. This gff file is written using unicode percent encodings. These encodings can be translated into UNIX format using the following script {\fontfamily{cmtt}\selectfont scripts/translateUniCodeFile.py}. 
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 $ chmod +x scripts/translateUniCodeFile.py
@@ -259,7 +280,7 @@ To call regions of significant artificial signal within each input, the read siz
 $ bash scripts/macs2_callpeaks_inputs.sh
 \end{minted}
 
-Greenscreen parameters were set with respect to the number of inputs used (20) and the size of the Arabidopisis genome. MACS2 outputs peaks were filtered by removing all peaks in Chloroplast and Mitochondia (since we are only interested in nuclear chromosome) and all peaks that do not have an average base pair q-value $<=10^{-10}$ (QVAL=10). After peaks have been filtered for each input experiment, the peaks from all of the input experiments are pooled. Then, any regions that overlap or are within the distance of 5kb are merged (MERGE_DISTANCE=5000).  Given 20 inputs, regions that are called in less than 10 distinct samples are dropped to get the final greenscreen regions (DISTINCT_NINPUTS=10). The following script was run using the respective parameters: {\fontfamily{cmtt}\selectfont scripts/generate\_20input\_greenscreenBed.sh}.
+Greenscreen parameters were set with respect to the number of inputs used (20) and the size of the Arabidopisis genome. MACS2 outputs peaks were filtered by removing all peaks in Chloroplast and Mitochondia (since we are only interested in nuclear chromosome) and all peaks that do not have an average base pair q-value $<=10^{-10}$ (QVAL=10). After peaks have been filtered for each input experiment, the peaks from all of the input experiments are pooled. Then, any regions that overlap or are within the distance of 5kb are merged (MERGE\_DISTANCE=5000).  Given 20 inputs, regions that are called in less than 10 distinct samples are dropped to get the final greenscreen regions (DISTINCT\_NINPUTS=10). The following script was run using the respective parameters: {\fontfamily{cmtt}\selectfont scripts/generate\_20input\_greenscreenBed.sh}.
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 $ bash scripts/generate_20input_greenscreenBed.sh [QVAL] [MERGE_DISTANCE] [DISTINCT_NINPUTS]
@@ -369,13 +390,13 @@ $ awk 'BEGIN{OFS="\t"} \
 To organize all of the annotation information, a custom script was generated at \url{https://github.com/sklasfeld/ChIP_Annotation}. This repository is cloned in the docker container with the following commands:
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 # change working directory to the scripts subdirectory
-$ cd /home/scripts
+$ cd /home/GreensceenProject/scripts
 
 # clone the ChIP_Annotation repo
 $ git clone https://github.com/sklasfeld/ChIP_Annotation.git
 
 # reset the working directory
-$ cd /home/
+$ cd /home/GreensceenProject/
 \end{minted}
 
 To use this annotation script to annotate the LFY peak summits, a BED file is needed that contains the locations of the summits. In addition, to include extra information about the peaks that are only included in NARROWPEAK format (such as the summit q-value), a NARROWPEAK file is also created with the locations of the summits ({\fontfamily{cmtt}\selectfont scripts/lfyPooledPeaks2Summits.sh}). The annotation code is run with the following batch script: (scripts/annotate\_LFY\_W\_2021.sh). This script generates the following files in the output directory "data/annotations/LFY\_Jin\_2021/":
