@@ -1,0 +1,1 @@
+This directory contains fastq files generated using a subset of reads from respective input control samples that mapped to Arabidopsis genome. These fastq file can be used to run the greenscreen generation demo: `scripts/generate_gsRegions_demo.py`
