@@ -50,8 +50,6 @@ def cmd(foo, verbose=False, output_f=""):
 		os.system(foo)
 
 
-# Set working directory to $HOME
-os.chdir("/home")
 
 # Hard-Coded Variables
 
