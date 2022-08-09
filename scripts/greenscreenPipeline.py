@@ -111,7 +111,7 @@ mapping_arg.add_argument('-b' ,'--bowtie2_params', type=str,
 	help='Any other parameters to run in the ' +
 		'Bowtie2 command. See the Bowtie2 manual ' +
 		'for information on all the parameters. ' +
-		'This remains unset in the demo.')
+		'This remains unset in the demo.', default="")
 mapping_arg.add_argument('-F', '--samtools_flag_filter', type=int,
 	help = ('After mapping input reads to the genome, ' +
 		'remove reads with these samtools flag present. ' +
@@ -564,10 +564,12 @@ for samp, samp_meta_df in input_meta_df.iterrows():
 # remove temporary adapter file/directory
 if copied_adapter:
 	# remove adapter file
-	print("remove %s" % args.adapter_f)
+	if not args.quiet:
+		print("remove %s" % args.adapter_f)
 	os.remove(args.adapter_f)
 	if new_adapter_dir:
-		print("remove %s" % temp_adapter_dir)
+		if not args.quiet:
+			print("remove %s" % temp_adapter_dir)
 		os.rmdir(temp_adapter_dir)
 # 20. concatonate all the peaks called by all the inputs
 concat_df = pd.concat(broadPeak_l, ignore_index=True)
