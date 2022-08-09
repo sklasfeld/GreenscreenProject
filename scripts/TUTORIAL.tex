@@ -92,16 +92,25 @@ Inside the docker container the following software should be installed:
 \subsection{Docker Workspace}
 To make this tutorial easier it is recommended to install git \cite{git} (\url{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}) and Docker \cite{Docker} (\url{https://docs.docker.com/get-docker/}). Git is simply a version control system which allows the user to obtain the latest scripts from the greenscreen github repository (\url{https://github.com/sklasfeld/GreenscreenProject}). Docker is a software to ensure these scripts are run in the same computational environment in which these scripts were also generated. This environment is set in a docker image which users can upload on their own computers.
 
+To clone the github repository run this command in your local working directory. This will create a directory called "GreenscreenProject" which contains necessary scripts for this tutorial.
+
+\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
+git clone https://github.com/sklasfeld/GreenscreenProject.git
+\end{minted}
+
 To manage docker images as a non-root user (and avoid using \emph{sudo} for every docker command) see \url{https://docs.docker.com/engine/install/linux-postinstall/}. An image of the greenscreen environment called `sklasfeld/greenscreen` is on dockerhub. To pull the image use the following command:
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
 docker pull sklasfeld/greenscreen:latest
 \end{minted}
 
-To run and generate the interactive environment (also called a docker "container") using this image type the following into the command line (replace the text in brackets with the correct information):
+To run and generate an interactive environment (also called a docker "container") using this image type the the command line below (replace the text in brackets with the correct information). Note that the `-w` parameter sets the working directory within the container. The `-v` command mounts the Greenscreen repository which should be in the present working directory (\$PWD) into the interactive container.
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ docker run --name [CONTAINER_NAME] -i -t sklasfeld/greenscreen bash
+$ docker run --name [CONTAINER_NAME]  \
+    --platform linux/amd64 -w /home/GreenscreenProject \
+    -v $PWD/GreenscreenProject:/home/GreenscreenProject \
+    -i -t sklasfeld/greenscreen bash
 \end{minted}
 
 [CONTAINER\_NAME] can be set to whatever name the user wants to name the new docker container.
@@ -125,24 +134,21 @@ $ docker container start [CONTAINER_NAME]
 $ docker attach [CONTAINER_NAME] 
 \end{minted}
 
-To run this tutorial, clone the github repository in the docker environment.
-
-\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-git clone https://github.com/sklasfeld/GreenscreenProject.git
-\end{minted}
-
-Set the working directory from within the repository. All commands need to be run within this working directory, unless specified otherwise.
-
-\begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-cd GreenscreenProject/
-\end{minted}
-
 \subsection{greenscreen generation}
 
 To run the entire greenscreen generation pipeline in one command use the demo script:
 
 \begin{minted}[frame=lines,breaklines,rulecolor=\color{orange}]{bash}
-$ python3 scripts/generate_gsRegions_demo.py
+$ python3 scripts/generate_gsRegions_demo.py \
+    -c Chr2 --genome_prefix TAIR10_Chr2 \
+    --trimmomatic_params "LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36" \
+    --bowtie2_index_dir demo/meta/ArabidopsisGenome/bowtie2_genome_dir \
+    --chipqc_samplesheet_dir  demo/meta \
+    demo/meta/input_meta.csv \
+    demo/meta/ArabidopsisGenome/TAIR10_Chr2.fasta \
+    demo/meta/ArabidopsisGenome/Araport11_GFF3_genes_transposons.UPDATED.201606.Chr2.gff \
+    demo/meta/ArabidopsisGenome/TAIR10_Chr2_count.txt \
+    demo/data
 \end{minted}
 
 The demo directory contains three demo input fastq files which are run through the pipeline to generate a greenscreen for chromosome two in Arabidopsis. For computational efficiency these fastq files have very low sequencing depth. The demo should produce greenscreen regions in a file located at `demo/data/macs2\_out/inputControls/qval10/merge500bp\_20inputs.txt`
@@ -544,3 +550,12 @@ Zhu, Y., Klasfeld, S., Jeong, C. W., Jin, R., Goto, K., Yamaguchi, N., \& Wagner
 
 \end{sloppypar}
 \end{document}
+
+
+ . 
+ . Jin, R., Klasfeld, S., Zhu, Y., Garcia, M.F., Xiao, J., Han, S.K., Konkol, A. and Wagner, D. (2021). LEAFY is a pioneer transcription factor and licenses cell reprogramming to floral fate. Nature Communications, 12(1), pp.1-14.
+ . Moyroud, E., Minguet, E.G., Ott, F., Yant, L., Posé, D., Monniaux, M., Blanchet, S., Bastien, O., Thévenon, E., Weigel, D. and Schmid, M., 2011. Prediction of regulatory interactions from genome sequences using a biophysical model for the Arabidopsis LEAFY transcription factor. The Plant Cell, 23(4), pp.1293-1306.
+ . Romera-Branchat, M., Severing, E., Pocard, C., Ohr, H., Vincent, C., Née, G., Martinez-Gallegos, R., Jang, S., Lalaguna, F.A., Madrigal, P. and Coupland, G., 2020. Functional divergence of the Arabidopsis florigen-interacting bZIP transcription factors FD and FDP. Cell reports, 31(9), p.107717.
+ . Sayou, C., Nanao, M.H., Jamin, M., Posé, D., Thévenon, E., Grégoire, L., Tichtinsky, G., Denay, G., Ott, F., Llobet, M.P. and Schmid, M. (2016). A SAM oligomerization domain shapes the genomic binding landscape of the LEAFY transcription factor. Nature communications, 7(1), 1-12.
+ . Goretti, D., Silvestre, M., Collani, S., Langenecker, T., Méndez, C., Madueno, F., & Schmid, M. (2020). TERMINAL FLOWER1 Functions as a Mobile Transcriptional Cofactor in the Shoot Apical Meristem. Plant Physiology, 182(4), 2081-2095.
+ . Winter, C. M., Austin, R. S., Blanvillain-Baufume, S., Reback, M. A., Monniaux, M., Wu, M. F., Sang Y., Yamaguchi, A., Yamaguchi, N., Parker, J.E., Parcy. F., Jensen. S.T., Li, H., \& Wagner, D. (2011). LEAFY target genes reveal floral regulatory logic, cis motifs, and a link to biotic stimulus response. Developmental cell, 20(4), 430-443.

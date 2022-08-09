@@ -1,0 +1,4 @@
+sample_name,path,read_length
+inputA_demo,demo/data/fastq/raw/inputA_demo.fq.gz,100
+inputB_demo,demo/data/fastq/raw/inputB_demo.fq.gz,80
+inputC_demo,demo/data/fastq/raw/inputC_demo.fq.gz,76
