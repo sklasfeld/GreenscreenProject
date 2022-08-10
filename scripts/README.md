@@ -1,6 +1,10 @@
 See supplemental methods for more detailed information.
+# 1.2 Docker Workspace
+1. `scripts/greenscreenPipeline.py`
 
-# 1.3 Green screen Generation
+	a. Purpose: Full greenscreen pipelines which ultimately exports greenscreen regions given raw fastq files list in comma-delimited table and genome information. Use `python3 scripts/greenscreenPipeline.py --help` command for more details on parameters.
+	 
+# 1.3 Greenscreen Generation
 1. `scripts/import_raw_fasta_inputs.sh`
 	
 	a. Purpose: batch imports raw FASTQ files
